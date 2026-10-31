@@ -335,15 +335,24 @@ function addBox(size, pos, color, opts = {}) {
 {
   const windowWall = nodes['wall_r465izk8hxmb8htc'];
   const sideWall = nodes['wall_nhimgghqjbpusi4m'];
-  if (windowWall) {
+  if (windowWall && sideWall) {
     const wx = (windowWall.start[0] + windowWall.end[0]) / 2;
-    const wz = (windowWall.start[1] + windowWall.end[1]) / 2;
-    addBox([1.3, 0.45, 0.65], [wx, 0.225, wz + 0.4], 0xeef3f5);
-  }
-  if (sideWall) {
+    const tubWidth = Math.hypot(windowWall.end[0] - windowWall.start[0], windowWall.end[1] - windowWall.start[1]) - 0.08;
+    const wallZ0 = Math.min(sideWall.start[1], sideWall.end[1]);
+    const wallZ1 = Math.max(sideWall.start[1], sideWall.end[1]);
     const ex = sideWall.start[0];
-    const sinkZ = Math.max(sideWall.start[1], sideWall.end[1]) - 0.4;
-    addBox([0.45, 0.85, 0.45], [ex - 0.25, 0.425, sinkZ], 0xffffff);
+
+    // bathtub, wall-to-wall under the window
+    addBox([tubWidth, 0.45, 0.7], [wx, 0.225, wallZ0 + 0.4], 0xeef3f5);
+
+    // toilet, far end of the side wall (where the sink used to be)
+    const wcZ = wallZ1 - 0.3;
+    addBox([0.42, 0.42, 0.42], [ex - 0.23, 0.21, wcZ], 0xffffff);
+    addBox([0.32, 0.12, 0.3], [ex - 0.23, 0.46, wcZ - 0.05], 0xffffff); // tank
+
+    // sink + mirror, between the tub and the toilet
+    const sinkZ = 1.15;
+    addBox([0.45, 0.85, 0.42], [ex - 0.23, 0.425, sinkZ], 0xffffff);
     const mirrorGeo = new THREE.PlaneGeometry(0.5, 0.7);
     const mirrorMat = new THREE.MeshStandardMaterial({ color: 0xb9d6dc, roughness: 0.1, metalness: 0.3, side: THREE.DoubleSide });
     const mirror = new THREE.Mesh(mirrorGeo, mirrorMat);
