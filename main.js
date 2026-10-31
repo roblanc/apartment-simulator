@@ -121,6 +121,7 @@ halfWallsBtn.addEventListener('click', () => {
     ceilingMeshes.forEach((m) => (m.visible = false));
     roofBtn.textContent = 'Show roof';
   }
+  renderer.shadowMap.enabled = !halfWallsOn;
   halfWallsBtn.textContent = halfWallsOn ? 'Full walls' : 'Half walls';
 });
 
