@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 const WALL_THICKNESS = 0.15;
 const CEILING_HEIGHT = 2.7;
@@ -17,6 +18,13 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
+
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0';
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild(labelRenderer.domElement);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.55));
 const sun = new THREE.DirectionalLight(0xffffff, 1.1);
@@ -41,13 +49,15 @@ scene.add(ground);
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.target.set(0, 1.2, 0);
 orbit.enableDamping = true;
+orbit.zoomSpeed = 3;
+orbit.panSpeed = 2.5;
+orbit.rotateSpeed = 1.2;
 
-// --- fly mode (pointer lock + free WASD + space/shift) ---
+// --- fly mode (pointer lock + free WASD + space/shift), click scene to enter ---
 const pointerLock = new PointerLockControls(camera, document.body);
 const keys = { w: false, a: false, s: false, d: false, ' ': false, shift: false };
 let walking = false;
-const walkBtn = document.getElementById('walkBtn');
-walkBtn.addEventListener('click', () => {
+renderer.domElement.addEventListener('click', () => {
   walking = true;
   orbit.enabled = false;
   pointerLock.lock();
@@ -68,9 +78,9 @@ topBtn.addEventListener('click', () => {
   orbit.update();
 });
 
-// --- roof toggle ---
+// --- roof toggle (hidden by default) ---
 const roofBtn = document.getElementById('roofBtn');
-let roofVisible = true;
+let roofVisible = false;
 roofBtn.addEventListener('click', () => {
   roofVisible = !roofVisible;
   ceilingMeshes.forEach((m) => (m.visible = roofVisible));
@@ -197,19 +207,31 @@ for (const id in nodes) {
   } else if (n.type === 'zone') {
     const color = n.floor?.finish?.properties?.color ?? '#999999';
     addFlatPolygon(n.polygon, 0.06, new THREE.Color(color));
+    if (n.name) {
+      const cx = n.polygon.reduce((s, p) => s + p[0], 0) / n.polygon.length;
+      const cz = n.polygon.reduce((s, p) => s + p[1], 0) / n.polygon.length;
+      const div = document.createElement('div');
+      div.textContent = n.name;
+      div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(10,12,16,0.55);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);';
+      const label = new CSS2DObject(div);
+      label.position.set(cx, 2.0, cz);
+      scene.add(label);
+    }
   } else if (n.type === 'ceiling') {
     ceilingMeshes.push(addFlatPolygon(n.polygon, CEILING_HEIGHT, new THREE.Color(0xe8e4da), { roughness: 1 }));
   }
 }
+ceilingMeshes.forEach((m) => (m.visible = roofVisible));
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  labelRenderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 const clock = new THREE.Clock();
-const FLY_SPEED = 4.5;
+const FLY_SPEED = 12;
 const forward = new THREE.Vector3();
 const right = new THREE.Vector3();
 const up = new THREE.Vector3(0, 1, 0);
@@ -235,5 +257,6 @@ function animate() {
   }
 
   renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
 }
 animate();
