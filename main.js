@@ -56,7 +56,7 @@ orbit.rotateSpeed = 1.2;
 
 // --- fly mode (pointer lock + free WASD + space/shift), click scene to enter ---
 const pointerLock = new PointerLockControls(camera, document.body);
-const keys = { w: false, a: false, s: false, d: false, ' ': false, shift: false };
+const keys = { w: false, a: false, s: false, d: false, ' ': false };
 let walking = false;
 renderer.domElement.addEventListener('click', () => {
   walking = true;
@@ -300,7 +300,6 @@ function animate() {
     if (keys.d) move.add(right);
     if (keys.a) move.sub(right);
     if (keys[' ']) move.add(up);
-    if (keys.shift) move.sub(up);
     if (move.lengthSq() > 0) move.normalize();
     camera.position.addScaledVector(move, FLY_SPEED * dt);
   } else {
