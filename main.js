@@ -319,6 +319,40 @@ for (const id in nodes) {
 }
 ceilingMeshes.forEach((m) => (m.visible = roofVisible));
 
+// --- small bathtub + sink/mirror in Baie, sized to fit the room (catalog fixtures are too big) ---
+function addBox(size, pos, color, opts = {}) {
+  const geo = new THREE.BoxGeometry(size[0], size[1], size[2]);
+  const mat = new THREE.MeshStandardMaterial({ color, roughness: opts.roughness ?? 0.4 });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(pos[0], pos[1], pos[2]);
+  if (opts.rotY) mesh.rotation.y = opts.rotY;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+  return mesh;
+}
+
+{
+  const windowWall = nodes['wall_r465izk8hxmb8htc'];
+  const sideWall = nodes['wall_nhimgghqjbpusi4m'];
+  if (windowWall) {
+    const wx = (windowWall.start[0] + windowWall.end[0]) / 2;
+    const wz = (windowWall.start[1] + windowWall.end[1]) / 2;
+    addBox([1.3, 0.45, 0.65], [wx, 0.225, wz + 0.4], 0xeef3f5);
+  }
+  if (sideWall) {
+    const ex = sideWall.start[0];
+    const sinkZ = Math.max(sideWall.start[1], sideWall.end[1]) - 0.4;
+    addBox([0.45, 0.85, 0.45], [ex - 0.25, 0.425, sinkZ], 0xffffff);
+    const mirrorGeo = new THREE.PlaneGeometry(0.5, 0.7);
+    const mirrorMat = new THREE.MeshStandardMaterial({ color: 0xb9d6dc, roughness: 0.1, metalness: 0.3, side: THREE.DoubleSide });
+    const mirror = new THREE.Mesh(mirrorGeo, mirrorMat);
+    mirror.position.set(ex - 0.03, 1.5, sinkZ);
+    mirror.rotation.y = Math.PI / 2;
+    scene.add(mirror);
+  }
+}
+
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
