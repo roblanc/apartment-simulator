@@ -42,23 +42,40 @@ const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.target.set(0, 1.2, 0);
 orbit.enableDamping = true;
 
-// --- walk mode (pointer lock + WASD) ---
+// --- fly mode (pointer lock + free WASD + space/shift) ---
 const pointerLock = new PointerLockControls(camera, document.body);
-const keys = { w: false, a: false, s: false, d: false };
+const keys = { w: false, a: false, s: false, d: false, ' ': false, shift: false };
 let walking = false;
 const walkBtn = document.getElementById('walkBtn');
 walkBtn.addEventListener('click', () => {
   walking = true;
   orbit.enabled = false;
-  camera.position.set(0, 1.6, 0);
   pointerLock.lock();
 });
 pointerLock.addEventListener('unlock', () => {
   walking = false;
   orbit.enabled = true;
 });
-window.addEventListener('keydown', (e) => { if (e.key.toLowerCase() in keys) keys[e.key.toLowerCase()] = true; });
-window.addEventListener('keyup', (e) => { if (e.key.toLowerCase() in keys) keys[e.key.toLowerCase()] = false; });
+window.addEventListener('keydown', (e) => { const k = e.key.toLowerCase(); if (k in keys) keys[k] = true; });
+window.addEventListener('keyup', (e) => { const k = e.key.toLowerCase(); if (k in keys) keys[k] = false; });
+
+// --- top-down view ---
+const topBtn = document.getElementById('topBtn');
+topBtn.addEventListener('click', () => {
+  if (walking) { pointerLock.unlock(); }
+  orbit.target.set(0, 0, 0);
+  camera.position.set(0.01, 24, 0.01);
+  orbit.update();
+});
+
+// --- roof toggle ---
+const roofBtn = document.getElementById('roofBtn');
+let roofVisible = true;
+roofBtn.addEventListener('click', () => {
+  roofVisible = !roofVisible;
+  ceilingMeshes.forEach((m) => (m.visible = roofVisible));
+  roofBtn.textContent = roofVisible ? 'Hide roof' : 'Show roof';
+});
 
 function toVec3(p2, y) {
   return new THREE.Vector3(p2[0], y, p2[1]);
@@ -172,6 +189,7 @@ for (const id in nodes) {
   (openingsByWall[n.wallId] ??= []).push(entry);
 }
 
+const ceilingMeshes = [];
 for (const id in nodes) {
   const n = nodes[id];
   if (n.type === 'wall') {
@@ -180,7 +198,7 @@ for (const id in nodes) {
     const color = n.floor?.finish?.properties?.color ?? '#999999';
     addFlatPolygon(n.polygon, 0.06, new THREE.Color(color));
   } else if (n.type === 'ceiling') {
-    addFlatPolygon(n.polygon, CEILING_HEIGHT, new THREE.Color(0xe8e4da), { roughness: 1 });
+    ceilingMeshes.push(addFlatPolygon(n.polygon, CEILING_HEIGHT, new THREE.Color(0xe8e4da), { roughness: 1 }));
   }
 }
 
@@ -191,9 +209,10 @@ window.addEventListener('resize', () => {
 });
 
 const clock = new THREE.Clock();
-const WALK_SPEED = 2.6;
+const FLY_SPEED = 4.5;
 const forward = new THREE.Vector3();
 const right = new THREE.Vector3();
+const up = new THREE.Vector3(0, 1, 0);
 
 function animate() {
   requestAnimationFrame(animate);
@@ -201,17 +220,16 @@ function animate() {
 
   if (walking && pointerLock.isLocked) {
     camera.getWorldDirection(forward);
-    forward.y = 0;
-    forward.normalize();
-    right.crossVectors(forward, camera.up).normalize();
+    right.crossVectors(forward, up).normalize();
     const move = new THREE.Vector3();
     if (keys.w) move.add(forward);
     if (keys.s) move.sub(forward);
     if (keys.d) move.add(right);
     if (keys.a) move.sub(right);
-    move.normalize();
-    camera.position.addScaledVector(move, WALK_SPEED * dt);
-    camera.position.y = 1.6;
+    if (keys[' ']) move.add(up);
+    if (keys.shift) move.sub(up);
+    if (move.lengthSq() > 0) move.normalize();
+    camera.position.addScaledVector(move, FLY_SPEED * dt);
   } else {
     orbit.update();
   }
