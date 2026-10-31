@@ -18,6 +18,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
+renderer.localClippingEnabled = true;
 document.body.appendChild(renderer.domElement);
 
 const labelRenderer = new CSS2DRenderer();
@@ -90,6 +91,31 @@ wallsBtn.addEventListener('click', () => {
     roofBtn.textContent = 'Show roof';
   }
   wallsBtn.textContent = wallsVisible ? 'Hide walls' : 'Show walls';
+});
+
+// --- half walls toggle (dollhouse view: walls cut at 1.2m) ---
+const HALF_WALL_HEIGHT = 1.2;
+const halfWallPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), HALF_WALL_HEIGHT);
+const halfWallsBtn = document.getElementById('halfWallsBtn');
+let halfWallsOn = false;
+halfWallsBtn.addEventListener('click', () => {
+  halfWallsOn = !halfWallsOn;
+  if (halfWallsOn && !wallsVisible) {
+    wallsVisible = true;
+    wallMeshes.forEach((m) => (m.visible = true));
+    traceMeshes.forEach((m) => (m.visible = false));
+    wallsBtn.textContent = 'Hide walls';
+  }
+  wallMeshes.forEach((m) => {
+    m.material.clippingPlanes = halfWallsOn ? [halfWallPlane] : [];
+    m.material.needsUpdate = true;
+  });
+  if (halfWallsOn) {
+    roofVisible = false;
+    ceilingMeshes.forEach((m) => (m.visible = false));
+    roofBtn.textContent = 'Show roof';
+  }
+  halfWallsBtn.textContent = halfWallsOn ? 'Full walls' : 'Half walls';
 });
 
 function toVec3(p2, y) {
