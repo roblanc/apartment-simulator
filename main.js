@@ -82,6 +82,7 @@ let wallsVisible = true;
 wallsBtn.addEventListener('click', () => {
   wallsVisible = !wallsVisible;
   wallMeshes.forEach((m) => (m.visible = wallsVisible));
+  traceMeshes.forEach((m) => (m.visible = !wallsVisible));
   if (!wallsVisible) {
     roofVisible = false;
     ceilingMeshes.forEach((m) => (m.visible = false));
@@ -169,7 +170,23 @@ function addOpeningPanel(start, end, xStart, xEnd, yStart, yEnd, color, opacity)
   wallMeshes.push(mesh); // door/window panels hide along with the walls
 }
 
+const traceMeshes = [];
+
+function addTraceLine(p1, p2, color, y) {
+  const geo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(p1[0], y, p1[1]),
+    new THREE.Vector3(p2[0], y, p2[1]),
+  ]);
+  const mat = new THREE.LineBasicMaterial({ color });
+  const line = new THREE.Line(geo, mat);
+  line.visible = false;
+  scene.add(line);
+  traceMeshes.push(line);
+  return line;
+}
+
 function buildWall(wall, openings) {
+  addTraceLine(wall.start, wall.end, 0x6b7280, 0.08);
   const length = Math.hypot(wall.end[0] - wall.start[0], wall.end[1] - wall.start[1]);
   let freeIntervals = [[0, length]];
 
@@ -261,18 +278,26 @@ for (const id in nodes) {
   const n = nodes[id];
   if (n.type === 'wall') {
     buildWall(n, openingsByWall[id] ?? []);
-  } else if (n.type === 'door' && (wallZoneCount[n.wallId] ?? 0) <= 1) {
+  } else if (n.type === 'door') {
     const wall = nodes[n.wallId];
-    const dir = new THREE.Vector2(wall.end[0] - wall.start[0], wall.end[1] - wall.start[1]);
-    const angle = Math.atan2(dir.y, dir.x);
-    const wx = wall.start[0] + Math.cos(angle) * n.position[0];
-    const wz = wall.start[1] + Math.sin(angle) * n.position[0];
-    const div = document.createElement('div');
-    div.textContent = 'Intrare';
-    div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(180,60,20,0.75);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);';
-    const label = new CSS2DObject(div);
-    label.position.set(wx, 2.3, wz);
-    scene.add(label);
+    const dir = new THREE.Vector2(wall.end[0] - wall.start[0], wall.end[1] - wall.start[1]).normalize();
+    const cx = wall.start[0] + dir.x * n.position[0];
+    const cz = wall.start[1] + dir.y * n.position[0];
+    const half = n.width / 2;
+    addTraceLine(
+      [cx - dir.x * half, cz - dir.y * half],
+      [cx + dir.x * half, cz + dir.y * half],
+      0xd98a4a,
+      0.09
+    );
+    if ((wallZoneCount[n.wallId] ?? 0) <= 1) {
+      const div = document.createElement('div');
+      div.textContent = 'Intrare';
+      div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(180,60,20,0.75);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);';
+      const label = new CSS2DObject(div);
+      label.position.set(cx, 2.3, cz);
+      scene.add(label);
+    }
   } else if (n.type === 'zone') {
     const color = n.floor?.finish?.properties?.color ?? '#999999';
     addFlatPolygon(n.polygon, 0.06, new THREE.Color(color));
