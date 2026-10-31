@@ -139,6 +139,48 @@ function polygonArea(points) {
   return Math.abs(a) / 2;
 }
 
+function createPlankTexture() {
+  const size = 512;
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#f2ede3';
+  ctx.fillRect(0, 0, size, size);
+
+  const plankWidthPx = size / 4; // 4 board-widths per texture tile (~0.3m each at repeat below)
+  for (let i = 0; i < 4; i++) {
+    const shade = Math.floor(Math.random() * 10 - 5);
+    ctx.fillStyle = `rgb(${242 + shade}, ${237 + shade}, ${227 + shade})`;
+    ctx.fillRect(i * plankWidthPx, 0, plankWidthPx, size);
+  }
+
+  ctx.strokeStyle = 'rgba(120,100,80,0.3)';
+  ctx.lineWidth = 2;
+  for (let x = plankWidthPx; x < size; x += plankWidthPx) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, size);
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = 'rgba(150,130,108,0.08)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 50; i++) {
+    const x = Math.random() * size;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.bezierCurveTo(x + 8, size * 0.33, x - 8, size * 0.66, x + 4, size);
+    ctx.stroke();
+  }
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(1 / 1.2, 1 / 1.2); // ShapeGeometry UVs are raw metres, so this is ~1.2m per plank-tile
+  return tex;
+}
+const plankTexture = createPlankTexture();
+
 function shapeFromPolygon(points) {
   const shape = new THREE.Shape();
   points.forEach(([x, y], i) => (i === 0 ? shape.moveTo(x, y) : shape.lineTo(x, y)));
@@ -150,7 +192,8 @@ function addFlatPolygon(points, height, color, opts = {}) {
   const geo = new THREE.ShapeGeometry(shape);
   geo.rotateX(Math.PI / 2);
   const mat = new THREE.MeshStandardMaterial({
-    color,
+    color: opts.map ? 0xffffff : color,
+    map: opts.map ?? null,
     roughness: opts.roughness ?? 0.7,
     transparent: !!opts.opacity,
     opacity: opts.opacity ?? 1,
@@ -334,7 +377,8 @@ for (const id in nodes) {
     }
   } else if (n.type === 'zone') {
     const color = n.floor?.finish?.properties?.color ?? '#999999';
-    addFlatPolygon(n.polygon, 0.06, new THREE.Color(color));
+    const isWood = n.floor?.finish?.preset === 'wood';
+    addFlatPolygon(n.polygon, 0.06, new THREE.Color(color), { map: isWood ? plankTexture : null, roughness: isWood ? 0.45 : 0.7 });
     if (n.name) {
       const cx = n.polygon.reduce((s, p) => s + p[0], 0) / n.polygon.length;
       const cz = n.polygon.reduce((s, p) => s + p[1], 0) / n.polygon.length;
@@ -392,6 +436,21 @@ function addBox(size, pos, color, opts = {}) {
     mirror.position.set(ex - 0.03, 1.5, sinkZ);
     mirror.rotation.y = Math.PI / 2;
     scene.add(mirror);
+  }
+}
+
+// --- Bucatarie: fridge, chair, table, chair along the wall on your left as you walk in ---
+{
+  const leftWall = nodes['wall_vy5o6dsigr00yvoh'];
+  const doorWall = nodes['wall_pzxjuuvjthl9yoq7'];
+  if (leftWall && doorWall) {
+    const wz = (leftWall.start[1] + leftWall.end[1]) / 2;
+    const nearDoorX = Math.min(leftWall.start[0], leftWall.end[0]) + 0.35; // end of the wall closest to the entry door
+
+    addBox([0.65, 1.8, 0.65], [nearDoorX, 0.9, wz + 0.33], 0xe9e9e9); // fridge
+    addBox([0.42, 0.45, 0.42], [nearDoorX + 0.95, 0.225, wz + 0.21], 0x6b4a33); // chair
+    addBox([0.85, 0.75, 0.7], [nearDoorX + 1.75, 0.375, wz + 0.35], 0xc9a876); // table
+    addBox([0.42, 0.45, 0.42], [nearDoorX + 2.55, 0.225, wz + 0.21], 0x6b4a33); // chair
   }
 }
 
