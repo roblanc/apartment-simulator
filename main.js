@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
-const WALL_THICKNESS = 0.15;
+const WALL_THICKNESS = 0.08;
+const WALL_COLOR = 0xf2f0ec;
 const CEILING_HEIGHT = 2.7;
 
 const scene = new THREE.Scene();
@@ -140,7 +141,7 @@ function addWallBox(start, end, xStart, xEnd, yStart, yEnd, color) {
   const segLen = Math.max(xEnd - xStart, 0.001);
   const segH = Math.max(yEnd - yStart, 0.001);
   const geo = new THREE.BoxGeometry(segLen, segH, WALL_THICKNESS);
-  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.9 });
+  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.55 });
   const mesh = new THREE.Mesh(geo, mat);
   const midLocal = (xStart + xEnd) / 2;
   const worldX = start[0] + Math.cos(angle) * midLocal;
@@ -195,8 +196,8 @@ function buildWall(wall, openings) {
   for (const o of sortedOpenings) {
     const xs = Math.max(0, o.xStart);
     const xe = Math.min(length, o.xEnd);
-    if (o.yEnd < CEILING_HEIGHT) addWallBox(wall.start, wall.end, xs, xe, o.yEnd, CEILING_HEIGHT, 0x6b6f76);
-    if (o.yStart > 0) addWallBox(wall.start, wall.end, xs, xe, 0, o.yStart, 0x6b6f76);
+    if (o.yEnd < CEILING_HEIGHT) addWallBox(wall.start, wall.end, xs, xe, o.yEnd, CEILING_HEIGHT, WALL_COLOR);
+    if (o.yStart > 0) addWallBox(wall.start, wall.end, xs, xe, 0, o.yStart, WALL_COLOR);
     addOpeningPanel(wall.start, wall.end, xs, xe, o.yStart, o.yEnd, o.kind === 'door' ? 0x8a5a33 : 0x8fd4e8, o.kind === 'door' ? 1 : 0.35);
 
     const next = [];
@@ -209,7 +210,7 @@ function buildWall(wall, openings) {
   }
 
   for (const [fs, fe] of freeIntervals) {
-    if (fe - fs > 0.01) addWallBox(wall.start, wall.end, fs, fe, 0, CEILING_HEIGHT, 0x6b6f76);
+    if (fe - fs > 0.01) addWallBox(wall.start, wall.end, fs, fe, 0, CEILING_HEIGHT, WALL_COLOR);
   }
 }
 
