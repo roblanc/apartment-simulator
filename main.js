@@ -11,7 +11,8 @@ scene.background = new THREE.Color(0x0b0d10);
 scene.fog = new THREE.Fog(0x0b0d10, 25, 60);
 
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
-camera.position.set(8, 6, 8);
+let sceneCenter = new THREE.Vector3(0, 0, 0);
+let sceneRadius = 10;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -38,7 +39,7 @@ sun.shadow.camera.bottom = -20;
 scene.add(sun);
 
 const ground = new THREE.Mesh(
-  new THREE.CircleGeometry(20, 48),
+  new THREE.CircleGeometry(30, 48),
   new THREE.MeshStandardMaterial({ color: 0x1a1d22, roughness: 1 })
 );
 ground.rotation.x = -Math.PI / 2;
@@ -73,8 +74,8 @@ window.addEventListener('keyup', (e) => { const k = e.key.toLowerCase(); if (k i
 const topBtn = document.getElementById('topBtn');
 topBtn.addEventListener('click', () => {
   if (walking) { pointerLock.unlock(); }
-  orbit.target.set(0, 0, 0);
-  camera.position.set(0.01, 24, 0.01);
+  orbit.target.copy(sceneCenter);
+  camera.position.set(sceneCenter.x + 0.01, sceneRadius * 2.2, sceneCenter.z + 0.01);
   orbit.update();
 });
 
@@ -100,7 +101,7 @@ function shapeFromPolygon(points) {
 function addFlatPolygon(points, height, color, opts = {}) {
   const shape = shapeFromPolygon(points.map(([x, y]) => [x, y]));
   const geo = new THREE.ShapeGeometry(shape);
-  geo.rotateX(-Math.PI / 2);
+  geo.rotateX(Math.PI / 2);
   const mat = new THREE.MeshStandardMaterial({
     color,
     roughness: opts.roughness ?? 0.7,
@@ -199,11 +200,61 @@ for (const id in nodes) {
   (openingsByWall[n.wallId] ??= []).push(entry);
 }
 
+// bounding box of all rooms, for framing the camera / top-down view
+let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+for (const id in nodes) {
+  const n = nodes[id];
+  if (n.type !== 'zone') continue;
+  for (const [x, z] of n.polygon) {
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+    minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z);
+  }
+}
+sceneCenter = new THREE.Vector3((minX + maxX) / 2, 1.2, (minZ + maxZ) / 2);
+sceneRadius = Math.max(maxX - minX, maxZ - minZ) / 2 + 2;
+orbit.target.copy(sceneCenter);
+camera.position.set(sceneCenter.x + sceneRadius * 0.9, sceneRadius * 0.9, sceneCenter.z + sceneRadius * 0.9);
+ground.position.set(sceneCenter.x, -0.02, sceneCenter.z);
+
+// exterior walls: those bordering exactly one zone (used to find the entrance door)
+const edgeKey = (a, b) => `${Math.round(a[0] * 1000)},${Math.round(a[1] * 1000)}|${Math.round(b[0] * 1000)},${Math.round(b[1] * 1000)}`;
+const wallEndpoints = {};
+for (const id in nodes) {
+  const n = nodes[id];
+  if (n.type === 'wall') wallEndpoints[id] = [n.start, n.end];
+}
+const wallZoneCount = {};
+for (const id in nodes) {
+  const n = nodes[id];
+  if (n.type !== 'zone') continue;
+  for (let i = 0; i < n.polygon.length; i++) {
+    const a = n.polygon[i], b = n.polygon[(i + 1) % n.polygon.length];
+    for (const wid in wallEndpoints) {
+      const [ws, we] = wallEndpoints[wid];
+      if (edgeKey(a, b) === edgeKey(ws, we) || edgeKey(a, b) === edgeKey(we, ws)) {
+        wallZoneCount[wid] = (wallZoneCount[wid] ?? 0) + 1;
+      }
+    }
+  }
+}
+
 const ceilingMeshes = [];
 for (const id in nodes) {
   const n = nodes[id];
   if (n.type === 'wall') {
     buildWall(n, openingsByWall[id] ?? []);
+  } else if (n.type === 'door' && (wallZoneCount[n.wallId] ?? 0) <= 1) {
+    const wall = nodes[n.wallId];
+    const dir = new THREE.Vector2(wall.end[0] - wall.start[0], wall.end[1] - wall.start[1]);
+    const angle = Math.atan2(dir.y, dir.x);
+    const wx = wall.start[0] + Math.cos(angle) * n.position[0];
+    const wz = wall.start[1] + Math.sin(angle) * n.position[0];
+    const div = document.createElement('div');
+    div.textContent = 'Intrare';
+    div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(180,60,20,0.75);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);';
+    const label = new CSS2DObject(div);
+    label.position.set(wx, 2.3, wz);
+    scene.add(label);
   } else if (n.type === 'zone') {
     const color = n.floor?.finish?.properties?.color ?? '#999999';
     addFlatPolygon(n.polygon, 0.06, new THREE.Color(color));
