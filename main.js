@@ -454,6 +454,25 @@ function addBox(size, pos, color, opts = {}) {
   }
 }
 
+// --- Sufragerie: TV on the right right after the door, sofa on the opposite wall ---
+{
+  const doorWall = nodes['wall_dulybm98352scnhf'];
+  const farWall = nodes['wall_9uykdpfhfsc1l1et'];
+  if (doorWall && farWall) {
+    const tvX = Math.max(doorWall.start[0], doorWall.end[0]) + 1.3;
+    const doorZ = doorWall.start[1];
+    const farZ = farWall.start[1];
+
+    addBox([1.4, 0.4, 0.4], [tvX, 0.2, doorZ - 0.25], 0x8a6a4a); // TV stand
+    addBox([1.2, 0.7, 0.06], [tvX, 0.75, doorZ - 0.2], 0x111214); // TV
+
+    addBox([2.2, 0.45, 0.9], [tvX, 0.225, farZ + 0.55], 0x4a4f57); // sofa seat
+    addBox([2.2, 0.45, 0.2], [tvX, 0.67, farZ + 0.16], 0x4a4f57); // sofa back
+    addBox([0.2, 0.3, 0.9], [tvX - 1.1, 0.5, farZ + 0.55], 0x4a4f57); // armrest
+    addBox([0.2, 0.3, 0.9], [tvX + 1.1, 0.5, farZ + 0.55], 0x4a4f57); // armrest
+  }
+}
+
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
