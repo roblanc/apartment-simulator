@@ -100,6 +100,12 @@ const halfWallsBtn = document.getElementById('halfWallsBtn');
 let halfWallsOn = false;
 halfWallsBtn.addEventListener('click', () => {
   halfWallsOn = !halfWallsOn;
+  if (halfWallsOn) {
+    // a top-down angle makes the clipped walls look identical to full walls; tilt to an oblique view so the cut is visible
+    orbit.target.copy(sceneCenter);
+    camera.position.set(sceneCenter.x + sceneRadius * 0.9, sceneRadius * 0.9, sceneCenter.z + sceneRadius * 0.9);
+    orbit.update();
+  }
   if (halfWallsOn && !wallsVisible) {
     wallsVisible = true;
     wallMeshes.forEach((m) => (m.visible = true));
