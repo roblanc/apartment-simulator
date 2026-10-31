@@ -76,8 +76,32 @@ roofBtn.addEventListener('click', () => {
   roofBtn.textContent = roofVisible ? 'Hide roof' : 'Show roof';
 });
 
+// --- walls toggle (floor plan mode: just the floor) ---
+const wallsBtn = document.getElementById('wallsBtn');
+let wallsVisible = true;
+wallsBtn.addEventListener('click', () => {
+  wallsVisible = !wallsVisible;
+  wallMeshes.forEach((m) => (m.visible = wallsVisible));
+  if (!wallsVisible) {
+    roofVisible = false;
+    ceilingMeshes.forEach((m) => (m.visible = false));
+    roofBtn.textContent = 'Show roof';
+  }
+  wallsBtn.textContent = wallsVisible ? 'Hide walls' : 'Show walls';
+});
+
 function toVec3(p2, y) {
   return new THREE.Vector3(p2[0], y, p2[1]);
+}
+
+function polygonArea(points) {
+  let a = 0;
+  for (let i = 0; i < points.length; i++) {
+    const [x1, y1] = points[i];
+    const [x2, y2] = points[(i + 1) % points.length];
+    a += x1 * y2 - x2 * y1;
+  }
+  return Math.abs(a) / 2;
 }
 
 function shapeFromPolygon(points) {
@@ -105,6 +129,8 @@ function addFlatPolygon(points, height, color, opts = {}) {
   return mesh;
 }
 
+const wallMeshes = [];
+
 function addWallBox(start, end, xStart, xEnd, yStart, yEnd, color) {
   const dir = new THREE.Vector2(end[0] - start[0], end[1] - start[1]);
   const length = dir.length();
@@ -123,6 +149,7 @@ function addWallBox(start, end, xStart, xEnd, yStart, yEnd, color) {
   mesh.castShadow = true;
   mesh.receiveShadow = true;
   scene.add(mesh);
+  wallMeshes.push(mesh);
 }
 
 function addOpeningPanel(start, end, xStart, xEnd, yStart, yEnd, color, opacity) {
@@ -139,6 +166,7 @@ function addOpeningPanel(start, end, xStart, xEnd, yStart, yEnd, color, opacity)
   mesh.position.set(worldX, (yStart + yEnd) / 2, worldZ);
   mesh.rotation.y = -angle;
   scene.add(mesh);
+  wallMeshes.push(mesh); // door/window panels hide along with the walls
 }
 
 function buildWall(wall, openings) {
@@ -252,8 +280,9 @@ for (const id in nodes) {
       const cx = n.polygon.reduce((s, p) => s + p[0], 0) / n.polygon.length;
       const cz = n.polygon.reduce((s, p) => s + p[1], 0) / n.polygon.length;
       const div = document.createElement('div');
-      div.textContent = n.name;
-      div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(10,12,16,0.55);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);';
+      div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(10,12,16,0.55);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);text-align:center;';
+      const area = polygonArea(n.polygon);
+      div.innerHTML = `${n.name}<br/><span style="font-size:10px;font-weight:400;opacity:0.65;">${area.toFixed(1)} m&sup2;</span>`;
       const label = new CSS2DObject(div);
       label.position.set(cx, 2.0, cz);
       scene.add(label);
