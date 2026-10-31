@@ -53,6 +53,7 @@ orbit.enableDamping = true;
 orbit.zoomSpeed = 3;
 orbit.panSpeed = 2.5;
 orbit.rotateSpeed = 1.2;
+orbit.maxPolarAngle = Math.PI * 0.495;
 
 // --- fly mode (pointer lock + free WASD + space/shift), click scene to enter ---
 const pointerLock = new PointerLockControls(camera, document.body);
@@ -213,6 +214,8 @@ for (const id in nodes) {
 sceneCenter = new THREE.Vector3((minX + maxX) / 2, 1.2, (minZ + maxZ) / 2);
 sceneRadius = Math.max(maxX - minX, maxZ - minZ) / 2 + 2;
 orbit.target.copy(sceneCenter);
+orbit.minDistance = sceneRadius * 0.5;
+orbit.maxDistance = sceneRadius * 5;
 camera.position.set(sceneCenter.x + sceneRadius * 0.9, sceneRadius * 0.9, sceneCenter.z + sceneRadius * 0.9);
 ground.position.set(sceneCenter.x, -0.02, sceneCenter.z);
 
