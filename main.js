@@ -55,11 +55,19 @@ orbit.panSpeed = 2.5;
 orbit.rotateSpeed = 1.2;
 orbit.maxPolarAngle = Math.PI * 0.495;
 
-// --- fly mode (pointer lock + free WASD + space/shift), click scene to enter ---
+// --- fly mode (pointer lock + free WASD + space/shift) ---
+// A plain click (no drag) enters fly mode; a drag is left alone for orbit rotate.
 const pointerLock = new PointerLockControls(camera, document.body);
 const keys = { w: false, a: false, s: false, d: false, ' ': false };
 let walking = false;
-renderer.domElement.addEventListener('click', () => {
+let downPos = null;
+renderer.domElement.addEventListener('pointerdown', (e) => { downPos = [e.clientX, e.clientY]; });
+renderer.domElement.addEventListener('pointerup', (e) => {
+  if (!downPos) return;
+  const dx = e.clientX - downPos[0], dy = e.clientY - downPos[1];
+  downPos = null;
+  if (Math.hypot(dx, dy) > 4) return; // was a drag, not a click
+  if (e.button !== 0) return; // only left click enters fly mode
   walking = true;
   orbit.enabled = false;
   pointerLock.lock();
