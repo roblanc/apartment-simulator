@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 const WALL_THICKNESS = 0.15;
@@ -55,34 +54,14 @@ orbit.panSpeed = 2.5;
 orbit.rotateSpeed = 1.2;
 orbit.maxPolarAngle = Math.PI * 0.495;
 
-// --- fly mode (pointer lock + free WASD + space/shift) ---
-// A plain click (no drag) enters fly mode; a drag is left alone for orbit rotate.
-const pointerLock = new PointerLockControls(camera, document.body);
+// --- WASD movement, free at the same time as mouse drag-to-look (no pointer lock) ---
 const keys = { w: false, a: false, s: false, d: false, ' ': false };
-let walking = false;
-let downPos = null;
-renderer.domElement.addEventListener('pointerdown', (e) => { downPos = [e.clientX, e.clientY]; });
-renderer.domElement.addEventListener('pointerup', (e) => {
-  if (!downPos) return;
-  const dx = e.clientX - downPos[0], dy = e.clientY - downPos[1];
-  downPos = null;
-  if (Math.hypot(dx, dy) > 4) return; // was a drag, not a click
-  if (e.button !== 0) return; // only left click enters fly mode
-  walking = true;
-  orbit.enabled = false;
-  pointerLock.lock();
-});
-pointerLock.addEventListener('unlock', () => {
-  walking = false;
-  orbit.enabled = true;
-});
 window.addEventListener('keydown', (e) => { const k = e.key.toLowerCase(); if (k in keys) keys[k] = true; });
 window.addEventListener('keyup', (e) => { const k = e.key.toLowerCase(); if (k in keys) keys[k] = false; });
 
 // --- top-down view ---
 const topBtn = document.getElementById('topBtn');
 topBtn.addEventListener('click', () => {
-  if (walking) { pointerLock.unlock(); }
   orbit.target.copy(sceneCenter);
   camera.position.set(sceneCenter.x + 0.01, sceneRadius * 2.2, sceneCenter.z + 0.01);
   orbit.update();
@@ -302,21 +281,23 @@ function animate() {
   requestAnimationFrame(animate);
   const dt = clock.getDelta();
 
-  if (walking && pointerLock.isLocked) {
-    camera.getWorldDirection(forward);
-    right.crossVectors(forward, up).normalize();
-    const move = new THREE.Vector3();
-    if (keys.w) move.add(forward);
-    if (keys.s) move.sub(forward);
-    if (keys.d) move.add(right);
-    if (keys.a) move.sub(right);
-    if (keys[' ']) move.add(up);
-    if (move.lengthSq() > 0) move.normalize();
-    camera.position.addScaledVector(move, FLY_SPEED * dt);
-  } else {
-    orbit.update();
+  camera.getWorldDirection(forward);
+  forward.y = 0;
+  forward.normalize();
+  right.crossVectors(forward, up).normalize();
+  const move = new THREE.Vector3();
+  if (keys.w) move.add(forward);
+  if (keys.s) move.sub(forward);
+  if (keys.d) move.add(right);
+  if (keys.a) move.sub(right);
+  if (keys[' ']) move.add(up);
+  if (move.lengthSq() > 0) {
+    move.normalize().multiplyScalar(FLY_SPEED * dt);
+    camera.position.add(move);
+    orbit.target.add(move);
   }
 
+  orbit.update();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }
