@@ -244,7 +244,7 @@ door_specs = [
     ("Door Hol-Bucatarie",     (0.00, 10.01), (1.89, 10.01), 0.85, 2.10, 0.95),
     ("Door Hol-Living",        (1.96, 7.12),  (1.96, 10.01), 0.90, 2.10, 1.45),
     ("Door Living-Logie",      (1.96, 11.98), (4.54, 11.98), 0.90, 2.10, 1.10),
-    ("Door Birou-Balcon",      (2.67, 1.31),  (5.81, 1.31),  0.85, 2.10, 0.80)
+    ("Door Birou-Balcon",      (5.81, 1.31),  (5.81, 4.53),  0.85, 2.10, 0.80)
 ]
 
 door_idx = 1
@@ -272,15 +272,15 @@ for name, p1, p2, width, height, pos in door_specs:
 window_specs = [
     # (name, p1, p2, width, height, pos, y_center)
     ("Window Dormitor North",       (0.00, 1.31),  (2.67, 1.31),  1.40, 1.50, 1.33, 1.25),
-    ("Window Birou Balcon North",   (2.67, 1.31),  (5.81, 1.31),  1.40, 1.50, 2.25, 1.25),
-    ("Window Birou East",           (5.81, 1.31),  (5.81, 4.53),  1.40, 1.50, 1.61, 1.25),
+    ("Window Birou Balcon North",   (2.67, 1.31),  (5.81, 1.31),  1.50, 1.50, 1.57, 1.25),
+    # Birou east wall has the balcony door
     ("Window Balcon North 1",       (2.67, 0.00),  (6.88, 0.00),  1.40, 1.50, 1.25, 1.25),
     ("Window Balcon North 2",       (2.67, 0.00),  (6.88, 0.00),  1.40, 1.50, 2.95, 1.25),
     ("Window Balcon East 1",        (6.88, 0.00),  (6.88, 4.53),  1.40, 1.50, 1.35, 1.25),
     ("Window Balcon East 2",        (6.88, 0.00),  (6.88, 4.53),  1.40, 1.50, 3.15, 1.25),
     ("Window Balcon South",         (5.81, 4.53),  (6.88, 4.53),  0.70, 1.50, 0.53, 1.25),
     ("Window Balcon West",          (2.67, 0.00),  (2.67, 1.31),  0.80, 1.50, 0.65, 1.25),
-    ("Window Sufragerie East",      (5.81, 7.12),  (5.81, 11.98), 2.00, 1.50, 2.43, 1.25),
+    ("Window Sufragerie Logie",     (1.96, 11.98), (4.54, 11.98), 1.30, 1.50, 2.00, 1.25),
     ("Window Baie East",            (5.81, 5.36),  (5.81, 7.12),  0.80, 0.80, 0.88, 1.50),
     ("Window Bucatarie South",      (0.00, 13.71), (1.89, 13.71), 1.20, 1.50, 0.95, 1.25),
     ("Window Logie South",          (1.89, 13.10), (4.54, 13.10), 2.00, 1.50, 1.32, 1.25)
