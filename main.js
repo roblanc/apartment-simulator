@@ -490,20 +490,27 @@ function getZoneBounds(zone) {
   }
 }
 
-// --- Birou: work desk, chair, bookcase, armchair ---
+// --- Birou: desk in front of window with monitor, sofa on left, wardrobe on right ---
 {
   const b = getZoneBounds(zonesByName['Birou'] || zonesByName['zone_birou']);
   if (b) {
-    // Desk against west wall under north light
-    addBox([1.30, 0.75, 0.65], [b.minX + 0.75, 0.375, b.minZ + 1.20], 0xc9a876); // desk
-    addBox([0.60, 0.40, 0.05], [b.minX + 0.75, 0.95, b.minZ + 0.95], 0x111214);  // monitor
-    addBox([0.50, 0.85, 0.50], [b.minX + 0.75, 0.425, b.minZ + 1.85], 0x2d3748); // office chair
+    const midX = (b.minX + b.maxX) / 2;
 
-    // Bookcase / storage along east wall
-    addBox([0.40, 1.90, 1.40], [b.maxX - 0.25, 0.95, b.minZ + 1.80], 0x5a4a3a);
+    // Desk directly in front of the north window
+    addBox([1.30, 0.75, 0.65], [midX, 0.375, b.minZ + 0.38], 0xc9a876); // desk
+    addBox([0.60, 0.40, 0.05], [midX, 0.95, b.minZ + 0.15], 0x111214);  // monitor
+    addBox([0.55, 0.85, 0.55], [midX, 0.425, b.minZ + 0.90], 0x2d3748); // office chair
 
-    // Reading armchair in corner
-    addBox([0.80, 0.75, 0.80], [b.minX + 0.50, 0.375, b.maxZ - 0.80], 0x4a5568);
+    // Sofa on the left of the desk (against west wall)
+    const sofaZ = b.minZ + 2.10;
+    addBox([0.85, 0.45, 1.80], [b.minX + 0.48, 0.225, sofaZ], 0x3a4b5c); // sofa seat
+    addBox([0.18, 0.45, 1.80], [b.minX + 0.14, 0.670, sofaZ], 0x3a4b5c); // sofa back
+    addBox([0.85, 0.30, 0.18], [b.minX + 0.48, 0.500, sofaZ - 0.90], 0x3a4b5c); // armrest north
+    addBox([0.85, 0.30, 0.18], [b.minX + 0.48, 0.500, sofaZ + 0.90], 0x3a4b5c); // armrest south
+
+    // Wardrobe on the right of the desk (against east wall)
+    const wardrobeZ = b.minZ + 1.20;
+    addBox([0.60, 2.10, 1.50], [b.maxX - 0.33, 1.05, wardrobeZ], 0x6e5746); // dulap
   }
 }
 

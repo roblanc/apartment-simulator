@@ -279,7 +279,7 @@ for name, p1, p2, width, height, pos in door_specs:
     door_idx += 1
 
 window_specs = [
-    ("Window Birou North",          (0.00, 1.31),  (2.67, 1.31),  1.40, 1.50, 1.33, 1.25),
+    ("Window Birou North",          (0.00, 1.31),  (2.67, 1.31),  1.40, 1.30, 1.33, 1.55), # sill at 0.90m, not down to floor
     # Window next to the balcony door on north wall of Dormitor
     ("Window Dormitor North",       (2.67, 1.31),  (5.81, 1.31),  1.40, 1.50, 2.15, 1.25),
     ("Window Balcon North 1",       (2.67, 0.00),  (6.88, 0.00),  1.40, 1.50, 1.25, 1.25),
