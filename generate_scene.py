@@ -107,7 +107,7 @@ walls = {}
 wall_idx = 1
 for (p1, p2), rlist in sorted(edges_map.items()):
     # Skip boundary between HolSus and HolJos so the hallway remains open
-    if set(rlist) == {'HolSus', 'HolJos'}:
+    if set(rlist) in ({'HolSus', 'HolJos'}, {'Vestibul', 'HolJos'}):
         continue
     length = math.hypot(p2[0] - p1[0], p2[1] - p1[1])
     wid = f"wall_{wall_idx:02d}_{p1[0]}_{p1[1]}_{p2[0]}_{p2[1]}".replace('-', 'm').replace('.', '_')
@@ -237,7 +237,7 @@ for w in walls.values():
 door_specs = [
     # (name, p1, p2, width, height, pos)
     ("Door Intrare",          (-2.92, 7.12), (-2.92, 8.42), 0.90, 2.10, 0.65),
-    ("Door Vestibul-Hol",      (0.00, 7.12),  (0.00, 8.42), 0.90, 2.10, 0.65),
+    # Door Vestibul-Hol removed (clean open entrance)
     ("Door Hol-Dormitor",      (0.41, 5.36),  (2.67, 5.36), 0.85, 2.10, 1.15),
     ("Door Hol-Birou",         (2.67, 5.36),  (3.55, 5.36), 0.75, 2.10, 0.44),
     ("Door Hol-Baie",          (3.55, 5.36),  (3.55, 7.12), 0.80, 2.10, 0.88),

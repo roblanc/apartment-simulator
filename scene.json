@@ -77,40 +77,39 @@
         "wall_04_0_0_1_31_0_0_5_36",
         "wall_05_0_0_1_31_2_67_1_31",
         "wall_06_0_0_5_36_0_41_5_36",
-        "wall_07_0_0_7_12_0_0_8_42",
-        "wall_08_0_0_7_12_0_41_7_12",
-        "wall_09_0_0_8_42_0_0_10_01",
-        "wall_10_0_0_10_01_0_0_13_71",
-        "wall_11_0_0_10_01_1_89_10_01",
-        "wall_12_0_0_13_71_1_89_13_71",
-        "wall_13_0_41_5_36_0_41_7_12",
-        "wall_14_0_41_5_36_2_67_5_36",
-        "wall_15_1_89_10_01_1_89_11_98",
-        "wall_16_1_89_10_01_1_96_10_01",
-        "wall_17_1_89_11_98_1_89_13_1",
-        "wall_18_1_89_11_98_1_96_11_98",
-        "wall_19_1_89_13_1_1_89_13_71",
-        "wall_20_1_89_13_1_4_54_13_1",
-        "wall_21_1_96_7_12_1_96_10_01",
-        "wall_22_1_96_7_12_3_55_7_12",
-        "wall_23_1_96_10_01_1_96_11_98",
-        "wall_24_1_96_11_98_4_54_11_98",
-        "wall_25_2_67_0_0_2_67_1_31",
-        "wall_26_2_67_0_0_6_88_0_0",
-        "wall_27_2_67_1_31_2_67_5_36",
-        "wall_28_2_67_1_31_5_81_1_31",
-        "wall_29_2_67_5_36_3_55_5_36",
-        "wall_30_3_55_5_36_3_55_7_12",
-        "wall_31_3_55_5_36_5_81_5_36",
-        "wall_32_3_55_7_12_5_81_7_12",
-        "wall_33_4_54_11_98_4_54_13_1",
-        "wall_34_4_54_11_98_5_81_11_98",
-        "wall_35_5_81_1_31_5_81_4_53",
-        "wall_36_5_81_4_53_5_81_5_36",
-        "wall_37_5_81_4_53_6_88_4_53",
-        "wall_38_5_81_5_36_5_81_7_12",
-        "wall_39_5_81_7_12_5_81_11_98",
-        "wall_40_6_88_0_0_6_88_4_53",
+        "wall_07_0_0_7_12_0_41_7_12",
+        "wall_08_0_0_8_42_0_0_10_01",
+        "wall_09_0_0_10_01_0_0_13_71",
+        "wall_10_0_0_10_01_1_89_10_01",
+        "wall_11_0_0_13_71_1_89_13_71",
+        "wall_12_0_41_5_36_0_41_7_12",
+        "wall_13_0_41_5_36_2_67_5_36",
+        "wall_14_1_89_10_01_1_89_11_98",
+        "wall_15_1_89_10_01_1_96_10_01",
+        "wall_16_1_89_11_98_1_89_13_1",
+        "wall_17_1_89_11_98_1_96_11_98",
+        "wall_18_1_89_13_1_1_89_13_71",
+        "wall_19_1_89_13_1_4_54_13_1",
+        "wall_20_1_96_7_12_1_96_10_01",
+        "wall_21_1_96_7_12_3_55_7_12",
+        "wall_22_1_96_10_01_1_96_11_98",
+        "wall_23_1_96_11_98_4_54_11_98",
+        "wall_24_2_67_0_0_2_67_1_31",
+        "wall_25_2_67_0_0_6_88_0_0",
+        "wall_26_2_67_1_31_2_67_5_36",
+        "wall_27_2_67_1_31_5_81_1_31",
+        "wall_28_2_67_5_36_3_55_5_36",
+        "wall_29_3_55_5_36_3_55_7_12",
+        "wall_30_3_55_5_36_5_81_5_36",
+        "wall_31_3_55_7_12_5_81_7_12",
+        "wall_32_4_54_11_98_4_54_13_1",
+        "wall_33_4_54_11_98_5_81_11_98",
+        "wall_34_5_81_1_31_5_81_4_53",
+        "wall_35_5_81_4_53_5_81_5_36",
+        "wall_36_5_81_4_53_6_88_4_53",
+        "wall_37_5_81_5_36_5_81_7_12",
+        "wall_38_5_81_7_12_5_81_11_98",
+        "wall_39_6_88_0_0_6_88_4_53",
         "door_01",
         "door_02",
         "door_03",
@@ -119,7 +118,6 @@
         "door_06",
         "door_07",
         "door_08",
-        "door_09",
         "window_01",
         "window_02",
         "window_03",
@@ -1119,36 +1117,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_07_0_0_7_12_0_0_8_42": {
+    "wall_07_0_0_7_12_0_41_7_12": {
       "object": "node",
-      "id": "wall_07_0_0_7_12_0_0_8_42",
+      "id": "wall_07_0_0_7_12_0_41_7_12",
       "type": "wall",
       "name": "Wall 7",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {
-        "rooms": [
-          "HolJos",
-          "Vestibul"
-        ]
-      },
-      "children": [],
-      "start": [
-        0.0,
-        7.12
-      ],
-      "end": [
-        0.0,
-        8.42
-      ],
-      "frontSide": "interior",
-      "backSide": "interior"
-    },
-    "wall_08_0_0_7_12_0_41_7_12": {
-      "object": "node",
-      "id": "wall_08_0_0_7_12_0_41_7_12",
-      "type": "wall",
-      "name": "Wall 8",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1168,11 +1141,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_09_0_0_8_42_0_0_10_01": {
+    "wall_08_0_0_8_42_0_0_10_01": {
       "object": "node",
-      "id": "wall_09_0_0_8_42_0_0_10_01",
+      "id": "wall_08_0_0_8_42_0_0_10_01",
       "type": "wall",
-      "name": "Wall 9",
+      "name": "Wall 8",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1192,11 +1165,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_10_0_0_10_01_0_0_13_71": {
+    "wall_09_0_0_10_01_0_0_13_71": {
       "object": "node",
-      "id": "wall_10_0_0_10_01_0_0_13_71",
+      "id": "wall_09_0_0_10_01_0_0_13_71",
       "type": "wall",
-      "name": "Wall 10",
+      "name": "Wall 9",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1216,11 +1189,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_11_0_0_10_01_1_89_10_01": {
+    "wall_10_0_0_10_01_1_89_10_01": {
       "object": "node",
-      "id": "wall_11_0_0_10_01_1_89_10_01",
+      "id": "wall_10_0_0_10_01_1_89_10_01",
       "type": "wall",
-      "name": "Wall 11",
+      "name": "Wall 10",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1241,11 +1214,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_12_0_0_13_71_1_89_13_71": {
+    "wall_11_0_0_13_71_1_89_13_71": {
       "object": "node",
-      "id": "wall_12_0_0_13_71_1_89_13_71",
+      "id": "wall_11_0_0_13_71_1_89_13_71",
       "type": "wall",
-      "name": "Wall 12",
+      "name": "Wall 11",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1265,11 +1238,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_13_0_41_5_36_0_41_7_12": {
+    "wall_12_0_41_5_36_0_41_7_12": {
       "object": "node",
-      "id": "wall_13_0_41_5_36_0_41_7_12",
+      "id": "wall_12_0_41_5_36_0_41_7_12",
       "type": "wall",
-      "name": "Wall 13",
+      "name": "Wall 12",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1289,11 +1262,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_14_0_41_5_36_2_67_5_36": {
+    "wall_13_0_41_5_36_2_67_5_36": {
       "object": "node",
-      "id": "wall_14_0_41_5_36_2_67_5_36",
+      "id": "wall_13_0_41_5_36_2_67_5_36",
       "type": "wall",
-      "name": "Wall 14",
+      "name": "Wall 13",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1314,11 +1287,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_15_1_89_10_01_1_89_11_98": {
+    "wall_14_1_89_10_01_1_89_11_98": {
       "object": "node",
-      "id": "wall_15_1_89_10_01_1_89_11_98",
+      "id": "wall_14_1_89_10_01_1_89_11_98",
       "type": "wall",
-      "name": "Wall 15",
+      "name": "Wall 14",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1338,11 +1311,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_16_1_89_10_01_1_96_10_01": {
+    "wall_15_1_89_10_01_1_96_10_01": {
       "object": "node",
-      "id": "wall_16_1_89_10_01_1_96_10_01",
+      "id": "wall_15_1_89_10_01_1_96_10_01",
       "type": "wall",
-      "name": "Wall 16",
+      "name": "Wall 15",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1362,11 +1335,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_17_1_89_11_98_1_89_13_1": {
+    "wall_16_1_89_11_98_1_89_13_1": {
       "object": "node",
-      "id": "wall_17_1_89_11_98_1_89_13_1",
+      "id": "wall_16_1_89_11_98_1_89_13_1",
       "type": "wall",
-      "name": "Wall 17",
+      "name": "Wall 16",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1387,11 +1360,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_18_1_89_11_98_1_96_11_98": {
+    "wall_17_1_89_11_98_1_96_11_98": {
       "object": "node",
-      "id": "wall_18_1_89_11_98_1_96_11_98",
+      "id": "wall_17_1_89_11_98_1_96_11_98",
       "type": "wall",
-      "name": "Wall 18",
+      "name": "Wall 17",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1411,11 +1384,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_19_1_89_13_1_1_89_13_71": {
+    "wall_18_1_89_13_1_1_89_13_71": {
       "object": "node",
-      "id": "wall_19_1_89_13_1_1_89_13_71",
+      "id": "wall_18_1_89_13_1_1_89_13_71",
       "type": "wall",
-      "name": "Wall 19",
+      "name": "Wall 18",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1435,11 +1408,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_20_1_89_13_1_4_54_13_1": {
+    "wall_19_1_89_13_1_4_54_13_1": {
       "object": "node",
-      "id": "wall_20_1_89_13_1_4_54_13_1",
+      "id": "wall_19_1_89_13_1_4_54_13_1",
       "type": "wall",
-      "name": "Wall 20",
+      "name": "Wall 19",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1459,11 +1432,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_21_1_96_7_12_1_96_10_01": {
+    "wall_20_1_96_7_12_1_96_10_01": {
       "object": "node",
-      "id": "wall_21_1_96_7_12_1_96_10_01",
+      "id": "wall_20_1_96_7_12_1_96_10_01",
       "type": "wall",
-      "name": "Wall 21",
+      "name": "Wall 20",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1484,11 +1457,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_22_1_96_7_12_3_55_7_12": {
+    "wall_21_1_96_7_12_3_55_7_12": {
       "object": "node",
-      "id": "wall_22_1_96_7_12_3_55_7_12",
+      "id": "wall_21_1_96_7_12_3_55_7_12",
       "type": "wall",
-      "name": "Wall 22",
+      "name": "Wall 21",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1509,11 +1482,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_23_1_96_10_01_1_96_11_98": {
+    "wall_22_1_96_10_01_1_96_11_98": {
       "object": "node",
-      "id": "wall_23_1_96_10_01_1_96_11_98",
+      "id": "wall_22_1_96_10_01_1_96_11_98",
       "type": "wall",
-      "name": "Wall 23",
+      "name": "Wall 22",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1533,11 +1506,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_24_1_96_11_98_4_54_11_98": {
+    "wall_23_1_96_11_98_4_54_11_98": {
       "object": "node",
-      "id": "wall_24_1_96_11_98_4_54_11_98",
+      "id": "wall_23_1_96_11_98_4_54_11_98",
       "type": "wall",
-      "name": "Wall 24",
+      "name": "Wall 23",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1558,11 +1531,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_25_2_67_0_0_2_67_1_31": {
+    "wall_24_2_67_0_0_2_67_1_31": {
       "object": "node",
-      "id": "wall_25_2_67_0_0_2_67_1_31",
+      "id": "wall_24_2_67_0_0_2_67_1_31",
       "type": "wall",
-      "name": "Wall 25",
+      "name": "Wall 24",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1582,11 +1555,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_26_2_67_0_0_6_88_0_0": {
+    "wall_25_2_67_0_0_6_88_0_0": {
       "object": "node",
-      "id": "wall_26_2_67_0_0_6_88_0_0",
+      "id": "wall_25_2_67_0_0_6_88_0_0",
       "type": "wall",
-      "name": "Wall 26",
+      "name": "Wall 25",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1606,11 +1579,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_27_2_67_1_31_2_67_5_36": {
+    "wall_26_2_67_1_31_2_67_5_36": {
       "object": "node",
-      "id": "wall_27_2_67_1_31_2_67_5_36",
+      "id": "wall_26_2_67_1_31_2_67_5_36",
       "type": "wall",
-      "name": "Wall 27",
+      "name": "Wall 26",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1631,11 +1604,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_28_2_67_1_31_5_81_1_31": {
+    "wall_27_2_67_1_31_5_81_1_31": {
       "object": "node",
-      "id": "wall_28_2_67_1_31_5_81_1_31",
+      "id": "wall_27_2_67_1_31_5_81_1_31",
       "type": "wall",
-      "name": "Wall 28",
+      "name": "Wall 27",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1656,11 +1629,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_29_2_67_5_36_3_55_5_36": {
+    "wall_28_2_67_5_36_3_55_5_36": {
       "object": "node",
-      "id": "wall_29_2_67_5_36_3_55_5_36",
+      "id": "wall_28_2_67_5_36_3_55_5_36",
       "type": "wall",
-      "name": "Wall 29",
+      "name": "Wall 28",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1681,11 +1654,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_30_3_55_5_36_3_55_7_12": {
+    "wall_29_3_55_5_36_3_55_7_12": {
       "object": "node",
-      "id": "wall_30_3_55_5_36_3_55_7_12",
+      "id": "wall_29_3_55_5_36_3_55_7_12",
       "type": "wall",
-      "name": "Wall 30",
+      "name": "Wall 29",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1706,11 +1679,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_31_3_55_5_36_5_81_5_36": {
+    "wall_30_3_55_5_36_5_81_5_36": {
       "object": "node",
-      "id": "wall_31_3_55_5_36_5_81_5_36",
+      "id": "wall_30_3_55_5_36_5_81_5_36",
       "type": "wall",
-      "name": "Wall 31",
+      "name": "Wall 30",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1731,11 +1704,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_32_3_55_7_12_5_81_7_12": {
+    "wall_31_3_55_7_12_5_81_7_12": {
       "object": "node",
-      "id": "wall_32_3_55_7_12_5_81_7_12",
+      "id": "wall_31_3_55_7_12_5_81_7_12",
       "type": "wall",
-      "name": "Wall 32",
+      "name": "Wall 31",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1756,11 +1729,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_33_4_54_11_98_4_54_13_1": {
+    "wall_32_4_54_11_98_4_54_13_1": {
       "object": "node",
-      "id": "wall_33_4_54_11_98_4_54_13_1",
+      "id": "wall_32_4_54_11_98_4_54_13_1",
       "type": "wall",
-      "name": "Wall 33",
+      "name": "Wall 32",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1780,11 +1753,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_34_4_54_11_98_5_81_11_98": {
+    "wall_33_4_54_11_98_5_81_11_98": {
       "object": "node",
-      "id": "wall_34_4_54_11_98_5_81_11_98",
+      "id": "wall_33_4_54_11_98_5_81_11_98",
       "type": "wall",
-      "name": "Wall 34",
+      "name": "Wall 33",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1804,11 +1777,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_35_5_81_1_31_5_81_4_53": {
+    "wall_34_5_81_1_31_5_81_4_53": {
       "object": "node",
-      "id": "wall_35_5_81_1_31_5_81_4_53",
+      "id": "wall_34_5_81_1_31_5_81_4_53",
       "type": "wall",
-      "name": "Wall 35",
+      "name": "Wall 34",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1829,11 +1802,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_36_5_81_4_53_5_81_5_36": {
+    "wall_35_5_81_4_53_5_81_5_36": {
       "object": "node",
-      "id": "wall_36_5_81_4_53_5_81_5_36",
+      "id": "wall_35_5_81_4_53_5_81_5_36",
       "type": "wall",
-      "name": "Wall 36",
+      "name": "Wall 35",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1853,11 +1826,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_37_5_81_4_53_6_88_4_53": {
+    "wall_36_5_81_4_53_6_88_4_53": {
       "object": "node",
-      "id": "wall_37_5_81_4_53_6_88_4_53",
+      "id": "wall_36_5_81_4_53_6_88_4_53",
       "type": "wall",
-      "name": "Wall 37",
+      "name": "Wall 36",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1877,11 +1850,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_38_5_81_5_36_5_81_7_12": {
+    "wall_37_5_81_5_36_5_81_7_12": {
       "object": "node",
-      "id": "wall_38_5_81_5_36_5_81_7_12",
+      "id": "wall_37_5_81_5_36_5_81_7_12",
       "type": "wall",
-      "name": "Wall 38",
+      "name": "Wall 37",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1901,11 +1874,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_39_5_81_7_12_5_81_11_98": {
+    "wall_38_5_81_7_12_5_81_11_98": {
       "object": "node",
-      "id": "wall_39_5_81_7_12_5_81_11_98",
+      "id": "wall_38_5_81_7_12_5_81_11_98",
       "type": "wall",
-      "name": "Wall 39",
+      "name": "Wall 38",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1925,11 +1898,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_40_6_88_0_0_6_88_4_53": {
+    "wall_39_6_88_0_0_6_88_4_53": {
       "object": "node",
-      "id": "wall_40_6_88_0_0_6_88_4_53",
+      "id": "wall_39_6_88_0_0_6_88_4_53",
       "type": "wall",
-      "name": "Wall 40",
+      "name": "Wall 39",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1970,28 +1943,11 @@
       "object": "node",
       "id": "door_02",
       "type": "door",
-      "name": "Door Vestibul-Hol",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {},
-      "wallId": "wall_07_0_0_7_12_0_0_8_42",
-      "position": [
-        0.65,
-        1.05,
-        0
-      ],
-      "width": 0.9,
-      "height": 2.1
-    },
-    "door_03": {
-      "object": "node",
-      "id": "door_03",
-      "type": "door",
       "name": "Door Hol-Dormitor",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_14_0_41_5_36_2_67_5_36",
+      "wallId": "wall_13_0_41_5_36_2_67_5_36",
       "position": [
         1.15,
         1.05,
@@ -2000,15 +1956,15 @@
       "width": 0.85,
       "height": 2.1
     },
-    "door_04": {
+    "door_03": {
       "object": "node",
-      "id": "door_04",
+      "id": "door_03",
       "type": "door",
       "name": "Door Hol-Birou",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_29_2_67_5_36_3_55_5_36",
+      "wallId": "wall_28_2_67_5_36_3_55_5_36",
       "position": [
         0.44,
         1.05,
@@ -2017,15 +1973,15 @@
       "width": 0.75,
       "height": 2.1
     },
-    "door_05": {
+    "door_04": {
       "object": "node",
-      "id": "door_05",
+      "id": "door_04",
       "type": "door",
       "name": "Door Hol-Baie",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_30_3_55_5_36_3_55_7_12",
+      "wallId": "wall_29_3_55_5_36_3_55_7_12",
       "position": [
         0.88,
         1.05,
@@ -2034,15 +1990,15 @@
       "width": 0.8,
       "height": 2.1
     },
-    "door_06": {
+    "door_05": {
       "object": "node",
-      "id": "door_06",
+      "id": "door_05",
       "type": "door",
       "name": "Door Hol-Bucatarie",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_11_0_0_10_01_1_89_10_01",
+      "wallId": "wall_10_0_0_10_01_1_89_10_01",
       "position": [
         0.95,
         1.05,
@@ -2051,17 +2007,34 @@
       "width": 0.85,
       "height": 2.1
     },
-    "door_07": {
+    "door_06": {
       "object": "node",
-      "id": "door_07",
+      "id": "door_06",
       "type": "door",
       "name": "Door Hol-Living",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_21_1_96_7_12_1_96_10_01",
+      "wallId": "wall_20_1_96_7_12_1_96_10_01",
       "position": [
         1.45,
+        1.05,
+        0
+      ],
+      "width": 0.9,
+      "height": 2.1
+    },
+    "door_07": {
+      "object": "node",
+      "id": "door_07",
+      "type": "door",
+      "name": "Door Living-Logie",
+      "parentId": "level_root",
+      "visible": true,
+      "metadata": {},
+      "wallId": "wall_23_1_96_11_98_4_54_11_98",
+      "position": [
+        1.1,
         1.05,
         0
       ],
@@ -2072,28 +2045,11 @@
       "object": "node",
       "id": "door_08",
       "type": "door",
-      "name": "Door Living-Logie",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {},
-      "wallId": "wall_24_1_96_11_98_4_54_11_98",
-      "position": [
-        1.1,
-        1.05,
-        0
-      ],
-      "width": 0.9,
-      "height": 2.1
-    },
-    "door_09": {
-      "object": "node",
-      "id": "door_09",
-      "type": "door",
       "name": "Door Birou-Balcon",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_35_5_81_1_31_5_81_4_53",
+      "wallId": "wall_34_5_81_1_31_5_81_4_53",
       "position": [
         0.8,
         1.05,
@@ -2127,7 +2083,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_28_2_67_1_31_5_81_1_31",
+      "wallId": "wall_27_2_67_1_31_5_81_1_31",
       "position": [
         1.57,
         1.25,
@@ -2144,7 +2100,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_26_2_67_0_0_6_88_0_0",
+      "wallId": "wall_25_2_67_0_0_6_88_0_0",
       "position": [
         1.25,
         1.25,
@@ -2161,7 +2117,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_26_2_67_0_0_6_88_0_0",
+      "wallId": "wall_25_2_67_0_0_6_88_0_0",
       "position": [
         2.95,
         1.25,
@@ -2178,7 +2134,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_40_6_88_0_0_6_88_4_53",
+      "wallId": "wall_39_6_88_0_0_6_88_4_53",
       "position": [
         1.35,
         1.25,
@@ -2195,7 +2151,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_40_6_88_0_0_6_88_4_53",
+      "wallId": "wall_39_6_88_0_0_6_88_4_53",
       "position": [
         3.15,
         1.25,
@@ -2212,7 +2168,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_37_5_81_4_53_6_88_4_53",
+      "wallId": "wall_36_5_81_4_53_6_88_4_53",
       "position": [
         0.53,
         1.25,
@@ -2229,7 +2185,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_25_2_67_0_0_2_67_1_31",
+      "wallId": "wall_24_2_67_0_0_2_67_1_31",
       "position": [
         0.65,
         1.25,
@@ -2246,7 +2202,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_24_1_96_11_98_4_54_11_98",
+      "wallId": "wall_23_1_96_11_98_4_54_11_98",
       "position": [
         2.0,
         1.25,
@@ -2263,7 +2219,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_38_5_81_5_36_5_81_7_12",
+      "wallId": "wall_37_5_81_5_36_5_81_7_12",
       "position": [
         0.88,
         1.5,
@@ -2280,7 +2236,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_12_0_0_13_71_1_89_13_71",
+      "wallId": "wall_11_0_0_13_71_1_89_13_71",
       "position": [
         0.95,
         1.25,
@@ -2297,7 +2253,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_20_1_89_13_1_4_54_13_1",
+      "wallId": "wall_19_1_89_13_1_4_54_13_1",
       "position": [
         1.32,
         1.25,
