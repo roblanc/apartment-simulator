@@ -467,20 +467,26 @@ function getZoneBounds(zone) {
   }
 }
 
-// --- Sufragerie: TV stand & TV against north wall, comfortable sofa facing it ---
+// --- Sufragerie: TV on west wall (indicated by user), sofa on opposing east wall ---
 {
   const b = getZoneBounds(zonesByName['Sufragerie'] || zonesByName['zone_sufragerie']);
   if (b) {
-    const midX = (b.minX + b.maxX) / 2;
-    addBox([1.60, 0.40, 0.40], [midX, 0.20, b.minZ + 0.25], 0x8a6a4a); // TV stand
-    addBox([1.40, 0.75, 0.06], [midX, 0.75, b.minZ + 0.22], 0x111214); // TV
+    const centerZ = 10.50;
 
-    const sofaZ = b.minZ + 2.80;
-    addBox([2.40, 0.45, 0.90], [midX, 0.225, sofaZ], 0x4a4f57); // sofa seat
-    addBox([2.40, 0.45, 0.20], [midX, 0.670, sofaZ + 0.35], 0x4a4f57); // sofa back
-    addBox([0.20, 0.30, 0.90], [midX - 1.20, 0.50, sofaZ], 0x4a4f57); // left armrest
-    addBox([0.20, 0.30, 0.90], [midX + 1.20, 0.50, sofaZ], 0x4a4f57); // right armrest
-    addBox([1.00, 0.35, 0.60], [midX, 0.175, sofaZ - 1.00], 0xa37b52); // coffee table
+    // TV stand & TV against west wall (x = b.minX)
+    addBox([0.40, 0.40, 1.60], [b.minX + 0.25, 0.20, centerZ], 0x8a6a4a); // TV stand
+    addBox([0.06, 0.75, 1.40], [b.minX + 0.20, 0.75, centerZ], 0x111214); // TV screen
+
+    // Sofa against opposing east wall (x = b.maxX)
+    const sofaX = b.maxX - 0.55;
+    addBox([0.90, 0.45, 2.40], [sofaX, 0.225, centerZ], 0x4a4f57); // sofa seat
+    addBox([0.20, 0.45, 2.40], [b.maxX - 0.12, 0.670, centerZ], 0x4a4f57); // sofa back
+    addBox([0.90, 0.30, 0.20], [sofaX, 0.50, centerZ - 1.20], 0x4a4f57); // north armrest
+    addBox([0.90, 0.30, 0.20], [sofaX, 0.50, centerZ + 1.20], 0x4a4f57); // south armrest
+
+    // Coffee table centered between TV and sofa
+    const tableX = (b.minX + 0.25 + sofaX) / 2;
+    addBox([0.60, 0.35, 1.00], [tableX, 0.175, centerZ], 0xa37b52);
   }
 }
 
