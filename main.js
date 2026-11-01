@@ -380,8 +380,8 @@ for (const id in nodes) {
     const isWood = n.floor?.finish?.preset === 'wood';
     addFlatPolygon(n.polygon, 0.06, new THREE.Color(color), { map: isWood ? plankTexture : null, roughness: isWood ? 0.45 : 0.7 });
     if (n.name) {
-      const cx = n.polygon.reduce((s, p) => s + p[0], 0) / n.polygon.length;
-      const cz = n.polygon.reduce((s, p) => s + p[1], 0) / n.polygon.length;
+      const cx = n.seed ? n.seed[0] : (n.polygon.reduce((s, p) => s + p[0], 0) / n.polygon.length);
+      const cz = n.seed ? n.seed[1] : (n.polygon.reduce((s, p) => s + p[1], 0) / n.polygon.length);
       const div = document.createElement('div');
       div.style.cssText = 'color:#fff;font:600 13px system-ui,sans-serif;background:rgba(10,12,16,0.55);padding:2px 8px;border-radius:5px;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,0.6);text-align:center;';
       const area = polygonArea(n.polygon);
@@ -396,7 +396,7 @@ for (const id in nodes) {
 }
 ceilingMeshes.forEach((m) => (m.visible = roofVisible));
 
-// --- small bathtub + sink/mirror in Baie, sized to fit the room (catalog fixtures are too big) ---
+// --- Furniture & fixtures parameterized by room zone (Dormitor, Baie, Bucatarie, Sufragerie) ---
 function addBox(size, pos, color, opts = {}) {
   const geo = new THREE.BoxGeometry(size[0], size[1], size[2]);
   const mat = new THREE.MeshStandardMaterial({ color, roughness: opts.roughness ?? 0.4 });
@@ -409,67 +409,91 @@ function addBox(size, pos, color, opts = {}) {
   return mesh;
 }
 
+const zonesByName = {};
+for (const id in nodes) {
+  const n = nodes[id];
+  if (n.type === 'zone') {
+    if (n.name) zonesByName[n.name] = n;
+    zonesByName[id] = n;
+  }
+}
+
+function getZoneBounds(zone) {
+  if (!zone || !zone.polygon) return null;
+  let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (const [x, z] of zone.polygon) {
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+    minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z);
+  }
+  return { minX, maxX, minZ, maxZ, width: maxX - minX, depth: maxZ - minZ };
+}
+
+// --- Baie: bathtub under window, wc and sink with mirror ---
 {
-  const windowWall = nodes['wall_r465izk8hxmb8htc'];
-  const sideWall = nodes['wall_nhimgghqjbpusi4m'];
-  if (windowWall && sideWall) {
-    const wx = (windowWall.start[0] + windowWall.end[0]) / 2;
-    const tubWidth = Math.hypot(windowWall.end[0] - windowWall.start[0], windowWall.end[1] - windowWall.start[1]) - 0.08;
-    const wallZ0 = Math.min(sideWall.start[1], sideWall.end[1]);
-    const wallZ1 = Math.max(sideWall.start[1], sideWall.end[1]);
-    const ex = sideWall.start[0];
+  const b = getZoneBounds(zonesByName['Baie'] || zonesByName['zone_baie']);
+  if (b) {
+    const tubW = 0.70;
+    const tubL = b.depth - 0.16;
+    addBox([tubW, 0.45, tubL], [b.maxX - tubW / 2, 0.225, (b.minZ + b.maxZ) / 2], 0xeef3f5);
 
-    // bathtub, wall-to-wall under the window
-    addBox([tubWidth, 0.45, 0.7], [wx, 0.225, wallZ0 + 0.4], 0xeef3f5);
+    // toilet against north/south wall
+    const wcX = b.minX + 0.40;
+    addBox([0.42, 0.42, 0.42], [wcX, 0.21, b.maxZ - 0.25], 0xffffff);
+    addBox([0.32, 0.12, 0.30], [wcX, 0.46, b.maxZ - 0.10], 0xffffff);
 
-    // toilet, far end of the side wall (where the sink used to be)
-    const wcZ = wallZ1 - 0.3;
-    addBox([0.42, 0.42, 0.42], [ex - 0.23, 0.21, wcZ], 0xffffff);
-    addBox([0.32, 0.12, 0.3], [ex - 0.23, 0.46, wcZ - 0.05], 0xffffff); // tank
-
-    // sink + mirror, between the tub and the toilet
-    const sinkZ = 1.15;
-    addBox([0.45, 0.85, 0.42], [ex - 0.23, 0.425, sinkZ], 0xffffff);
+    // sink + mirror
+    const sinkX = b.minX + 0.40;
+    addBox([0.48, 0.85, 0.42], [sinkX, 0.425, b.minZ + 0.25], 0xffffff);
     const mirrorGeo = new THREE.PlaneGeometry(0.5, 0.7);
     const mirrorMat = new THREE.MeshStandardMaterial({ color: 0xb9d6dc, roughness: 0.1, metalness: 0.3, side: THREE.DoubleSide });
     const mirror = new THREE.Mesh(mirrorGeo, mirrorMat);
-    mirror.position.set(ex - 0.03, 1.5, sinkZ);
-    mirror.rotation.y = Math.PI / 2;
+    mirror.position.set(sinkX, 1.5, b.minZ + 0.03);
     scene.add(mirror);
   }
 }
 
-// --- Bucatarie: fridge, chair, table, chair along the wall on your left as you walk in ---
+// --- Bucătărie: fridge, dining table + chairs, kitchen counter ---
 {
-  const leftWall = nodes['wall_vy5o6dsigr00yvoh'];
-  const doorWall = nodes['wall_pzxjuuvjthl9yoq7'];
-  if (leftWall && doorWall) {
-    const wz = (leftWall.start[1] + leftWall.end[1]) / 2;
-    const nearDoorX = Math.min(leftWall.start[0], leftWall.end[0]) + 0.35; // end of the wall closest to the entry door
+  const b = getZoneBounds(zonesByName['Bucătărie'] || zonesByName['Bucatarie'] || zonesByName['zone_bucatarie']);
+  if (b) {
+    const wx = b.minX + 0.36;
+    addBox([0.65, 1.80, 0.65], [wx, 0.90, b.minZ + 0.50], 0xe9e9e9); // fridge
+    addBox([0.42, 0.45, 0.42], [wx - 0.10, 0.225, b.minZ + 1.50], 0x6b4a33); // chair
+    addBox([0.65, 0.75, 0.85], [wx + 0.05, 0.375, b.minZ + 2.20], 0xc9a876); // table
+    addBox([0.42, 0.45, 0.42], [wx - 0.10, 0.225, b.minZ + 2.90], 0x6b4a33); // chair
 
-    addBox([0.65, 1.8, 0.65], [nearDoorX, 0.9, wz + 0.33], 0xe9e9e9); // fridge
-    addBox([0.42, 0.45, 0.42], [nearDoorX + 0.95, 0.225, wz + 0.21], 0x6b4a33); // chair
-    addBox([0.85, 0.75, 0.7], [nearDoorX + 1.75, 0.375, wz + 0.35], 0xc9a876); // table
-    addBox([0.42, 0.45, 0.42], [nearDoorX + 2.55, 0.225, wz + 0.21], 0x6b4a33); // chair
+    // kitchen counter along east wall
+    addBox([0.55, 0.85, 2.00], [b.maxX - 0.30, 0.425, b.minZ + 1.70], 0xd0d5dd);
   }
 }
 
-// --- Sufragerie: TV on the right right after the door, sofa on the opposite wall ---
+// --- Sufragerie: TV stand & TV against north wall, comfortable sofa facing it ---
 {
-  const doorWall = nodes['wall_dulybm98352scnhf'];
-  const farWall = nodes['wall_9uykdpfhfsc1l1et'];
-  if (doorWall && farWall) {
-    const tvX = Math.max(doorWall.start[0], doorWall.end[0]) + 1.3;
-    const doorZ = doorWall.start[1];
-    const farZ = farWall.start[1];
+  const b = getZoneBounds(zonesByName['Sufragerie'] || zonesByName['zone_sufragerie']);
+  if (b) {
+    const midX = (b.minX + b.maxX) / 2;
+    addBox([1.60, 0.40, 0.40], [midX, 0.20, b.minZ + 0.25], 0x8a6a4a); // TV stand
+    addBox([1.40, 0.75, 0.06], [midX, 0.75, b.minZ + 0.22], 0x111214); // TV
 
-    addBox([1.4, 0.4, 0.4], [tvX, 0.2, doorZ - 0.25], 0x8a6a4a); // TV stand
-    addBox([1.2, 0.7, 0.06], [tvX, 0.75, doorZ - 0.2], 0x111214); // TV
+    const sofaZ = b.minZ + 2.80;
+    addBox([2.40, 0.45, 0.90], [midX, 0.225, sofaZ], 0x4a4f57); // sofa seat
+    addBox([2.40, 0.45, 0.20], [midX, 0.670, sofaZ + 0.35], 0x4a4f57); // sofa back
+    addBox([0.20, 0.30, 0.90], [midX - 1.20, 0.50, sofaZ], 0x4a4f57); // left armrest
+    addBox([0.20, 0.30, 0.90], [midX + 1.20, 0.50, sofaZ], 0x4a4f57); // right armrest
+    addBox([1.00, 0.35, 0.60], [midX, 0.175, sofaZ - 1.00], 0xa37b52); // coffee table
+  }
+}
 
-    addBox([2.2, 0.45, 0.9], [tvX, 0.225, farZ + 0.55], 0x4a4f57); // sofa seat
-    addBox([2.2, 0.45, 0.2], [tvX, 0.67, farZ + 0.16], 0x4a4f57); // sofa back
-    addBox([0.2, 0.3, 0.9], [tvX - 1.1, 0.5, farZ + 0.55], 0x4a4f57); // armrest
-    addBox([0.2, 0.3, 0.9], [tvX + 1.1, 0.5, farZ + 0.55], 0x4a4f57); // armrest
+// --- Dormitor: double bed, nightstands, wardrobe ---
+{
+  const b = getZoneBounds(zonesByName['Dormitor'] || zonesByName['zone_dormitor']);
+  if (b) {
+    const midZ = (b.minZ + b.maxZ) / 2;
+    addBox([0.10, 0.95, 1.80], [b.minX + 0.08, 0.475, midZ], 0x5a4a3a); // headboard
+    addBox([2.00, 0.45, 1.60], [b.minX + 1.10, 0.225, midZ], 0xeeeae2); // bed mattress
+    addBox([0.45, 0.45, 0.40], [b.minX + 0.25, 0.225, midZ - 1.15], 0x8a6a4a); // nightstand
+    addBox([0.45, 0.45, 0.40], [b.minX + 0.25, 0.225, midZ + 1.15], 0x8a6a4a); // nightstand
+    addBox([0.60, 2.10, 1.80], [b.maxX - 0.33, 1.05, midZ], 0x6e5746); // wardrobe
   }
 }
 
