@@ -69,8 +69,6 @@
         "ceiling_sufragerie",
         "zone_bucatarie",
         "ceiling_bucatarie",
-        "zone_logie",
-        "ceiling_logie",
         "wall_01_m2_92_7_12_m2_92_8_42",
         "wall_02_m2_92_7_12_0_0_7_12",
         "wall_03_m2_92_8_42_0_0_8_42",
@@ -93,23 +91,22 @@
         "wall_20_1_96_7_12_1_96_10_01",
         "wall_21_1_96_7_12_3_55_7_12",
         "wall_22_1_96_10_01_1_96_11_98",
-        "wall_23_1_96_11_98_4_54_11_98",
-        "wall_24_2_67_0_0_2_67_1_31",
-        "wall_25_2_67_0_0_6_88_0_0",
-        "wall_26_2_67_1_31_2_67_5_36",
-        "wall_27_2_67_1_31_5_81_1_31",
-        "wall_28_2_67_5_36_3_55_5_36",
-        "wall_29_3_55_5_36_3_55_7_12",
-        "wall_30_3_55_5_36_5_81_5_36",
-        "wall_31_3_55_7_12_5_81_7_12",
-        "wall_32_4_54_11_98_4_54_13_1",
-        "wall_33_4_54_11_98_5_81_11_98",
-        "wall_34_5_81_1_31_5_81_4_53",
-        "wall_35_5_81_4_53_5_81_5_36",
-        "wall_36_5_81_4_53_6_88_4_53",
-        "wall_37_5_81_5_36_5_81_7_12",
-        "wall_38_5_81_7_12_5_81_11_98",
-        "wall_39_6_88_0_0_6_88_4_53",
+        "wall_23_2_67_0_0_2_67_1_31",
+        "wall_24_2_67_0_0_6_88_0_0",
+        "wall_25_2_67_1_31_2_67_5_36",
+        "wall_26_2_67_1_31_5_81_1_31",
+        "wall_27_2_67_5_36_3_55_5_36",
+        "wall_28_3_55_5_36_3_55_7_12",
+        "wall_29_3_55_5_36_5_81_5_36",
+        "wall_30_3_55_7_12_5_81_7_12",
+        "wall_31_4_54_11_98_4_54_13_1",
+        "wall_32_4_54_11_98_5_81_11_98",
+        "wall_33_5_81_1_31_5_81_4_53",
+        "wall_34_5_81_4_53_5_81_5_36",
+        "wall_35_5_81_4_53_6_88_4_53",
+        "wall_36_5_81_5_36_5_81_7_12",
+        "wall_37_5_81_7_12_5_81_11_98",
+        "wall_38_6_88_0_0_6_88_4_53",
         "door_01",
         "door_02",
         "door_03",
@@ -117,7 +114,6 @@
         "door_05",
         "door_06",
         "door_07",
-        "door_08",
         "window_01",
         "window_02",
         "window_03",
@@ -128,8 +124,7 @@
         "window_08",
         "window_09",
         "window_10",
-        "window_11",
-        "window_12"
+        "window_11"
       ],
       "level": 0,
       "baseElevation": 0,
@@ -742,18 +737,34 @@
           11.98
         ],
         [
+          4.54,
+          13.1
+        ],
+        [
+          1.89,
+          13.1
+        ],
+        [
+          1.89,
+          11.98
+        ],
+        [
           1.96,
           11.98
         ],
         [
           1.96,
           10.01
+        ],
+        [
+          1.96,
+          7.12
         ]
       ],
       "holes": [],
       "seed": [
         3.88,
-        9.55
+        9.8
       ],
       "floor": {
         "finish": {
@@ -796,12 +807,28 @@
           11.98
         ],
         [
+          4.54,
+          13.1
+        ],
+        [
+          1.89,
+          13.1
+        ],
+        [
+          1.89,
+          11.98
+        ],
+        [
           1.96,
           11.98
         ],
         [
           1.96,
           10.01
+        ],
+        [
+          1.96,
+          7.12
         ]
       ],
       "holes": [],
@@ -893,85 +920,6 @@
       ],
       "holes": [],
       "zoneId": "zone_bucatarie"
-    },
-    "zone_logie": {
-      "object": "node",
-      "id": "zone_logie",
-      "type": "zone",
-      "name": "Logie",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {},
-      "polygon": [
-        [
-          1.89,
-          11.98
-        ],
-        [
-          1.96,
-          11.98
-        ],
-        [
-          4.54,
-          11.98
-        ],
-        [
-          4.54,
-          13.1
-        ],
-        [
-          1.89,
-          13.1
-        ]
-      ],
-      "holes": [],
-      "seed": [
-        3.21,
-        12.54
-      ],
-      "floor": {
-        "finish": {
-          "preset": "wood",
-          "properties": {
-            "color": "#f0ece3",
-            "roughness": 0.45
-          }
-        }
-      }
-    },
-    "ceiling_logie": {
-      "object": "node",
-      "id": "ceiling_logie",
-      "type": "ceiling",
-      "name": "Logie Ceiling",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {},
-      "children": [],
-      "polygon": [
-        [
-          1.89,
-          11.98
-        ],
-        [
-          1.96,
-          11.98
-        ],
-        [
-          4.54,
-          11.98
-        ],
-        [
-          4.54,
-          13.1
-        ],
-        [
-          1.89,
-          13.1
-        ]
-      ],
-      "holes": [],
-      "zoneId": "zone_logie"
     },
     "wall_01_m2_92_7_12_m2_92_8_42": {
       "object": "node",
@@ -1344,8 +1292,8 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Bucatarie",
-          "Logie"
+          "Sufragerie",
+          "Bucatarie"
         ]
       },
       "children": [],
@@ -1369,7 +1317,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Logie"
+          "Sufragerie"
         ]
       },
       "children": [],
@@ -1417,7 +1365,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Logie"
+          "Sufragerie"
         ]
       },
       "children": [],
@@ -1506,36 +1454,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_23_1_96_11_98_4_54_11_98": {
+    "wall_23_2_67_0_0_2_67_1_31": {
       "object": "node",
-      "id": "wall_23_1_96_11_98_4_54_11_98",
+      "id": "wall_23_2_67_0_0_2_67_1_31",
       "type": "wall",
       "name": "Wall 23",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {
-        "rooms": [
-          "Sufragerie",
-          "Logie"
-        ]
-      },
-      "children": [],
-      "start": [
-        1.96,
-        11.98
-      ],
-      "end": [
-        4.54,
-        11.98
-      ],
-      "frontSide": "interior",
-      "backSide": "interior"
-    },
-    "wall_24_2_67_0_0_2_67_1_31": {
-      "object": "node",
-      "id": "wall_24_2_67_0_0_2_67_1_31",
-      "type": "wall",
-      "name": "Wall 24",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1555,11 +1478,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_25_2_67_0_0_6_88_0_0": {
+    "wall_24_2_67_0_0_6_88_0_0": {
       "object": "node",
-      "id": "wall_25_2_67_0_0_6_88_0_0",
+      "id": "wall_24_2_67_0_0_6_88_0_0",
       "type": "wall",
-      "name": "Wall 25",
+      "name": "Wall 24",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1579,11 +1502,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_26_2_67_1_31_2_67_5_36": {
+    "wall_25_2_67_1_31_2_67_5_36": {
       "object": "node",
-      "id": "wall_26_2_67_1_31_2_67_5_36",
+      "id": "wall_25_2_67_1_31_2_67_5_36",
       "type": "wall",
-      "name": "Wall 26",
+      "name": "Wall 25",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1604,11 +1527,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_27_2_67_1_31_5_81_1_31": {
+    "wall_26_2_67_1_31_5_81_1_31": {
       "object": "node",
-      "id": "wall_27_2_67_1_31_5_81_1_31",
+      "id": "wall_26_2_67_1_31_5_81_1_31",
       "type": "wall",
-      "name": "Wall 27",
+      "name": "Wall 26",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1629,11 +1552,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_28_2_67_5_36_3_55_5_36": {
+    "wall_27_2_67_5_36_3_55_5_36": {
       "object": "node",
-      "id": "wall_28_2_67_5_36_3_55_5_36",
+      "id": "wall_27_2_67_5_36_3_55_5_36",
       "type": "wall",
-      "name": "Wall 28",
+      "name": "Wall 27",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1654,11 +1577,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_29_3_55_5_36_3_55_7_12": {
+    "wall_28_3_55_5_36_3_55_7_12": {
       "object": "node",
-      "id": "wall_29_3_55_5_36_3_55_7_12",
+      "id": "wall_28_3_55_5_36_3_55_7_12",
       "type": "wall",
-      "name": "Wall 29",
+      "name": "Wall 28",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1679,11 +1602,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_30_3_55_5_36_5_81_5_36": {
+    "wall_29_3_55_5_36_5_81_5_36": {
       "object": "node",
-      "id": "wall_30_3_55_5_36_5_81_5_36",
+      "id": "wall_29_3_55_5_36_5_81_5_36",
       "type": "wall",
-      "name": "Wall 30",
+      "name": "Wall 29",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1704,11 +1627,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_31_3_55_7_12_5_81_7_12": {
+    "wall_30_3_55_7_12_5_81_7_12": {
       "object": "node",
-      "id": "wall_31_3_55_7_12_5_81_7_12",
+      "id": "wall_30_3_55_7_12_5_81_7_12",
       "type": "wall",
-      "name": "Wall 31",
+      "name": "Wall 30",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1729,16 +1652,16 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_32_4_54_11_98_4_54_13_1": {
+    "wall_31_4_54_11_98_4_54_13_1": {
       "object": "node",
-      "id": "wall_32_4_54_11_98_4_54_13_1",
+      "id": "wall_31_4_54_11_98_4_54_13_1",
       "type": "wall",
-      "name": "Wall 32",
+      "name": "Wall 31",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
         "rooms": [
-          "Logie"
+          "Sufragerie"
         ]
       },
       "children": [],
@@ -1753,11 +1676,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_33_4_54_11_98_5_81_11_98": {
+    "wall_32_4_54_11_98_5_81_11_98": {
       "object": "node",
-      "id": "wall_33_4_54_11_98_5_81_11_98",
+      "id": "wall_32_4_54_11_98_5_81_11_98",
       "type": "wall",
-      "name": "Wall 33",
+      "name": "Wall 32",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1777,11 +1700,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_34_5_81_1_31_5_81_4_53": {
+    "wall_33_5_81_1_31_5_81_4_53": {
       "object": "node",
-      "id": "wall_34_5_81_1_31_5_81_4_53",
+      "id": "wall_33_5_81_1_31_5_81_4_53",
       "type": "wall",
-      "name": "Wall 34",
+      "name": "Wall 33",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1802,11 +1725,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_35_5_81_4_53_5_81_5_36": {
+    "wall_34_5_81_4_53_5_81_5_36": {
       "object": "node",
-      "id": "wall_35_5_81_4_53_5_81_5_36",
+      "id": "wall_34_5_81_4_53_5_81_5_36",
       "type": "wall",
-      "name": "Wall 35",
+      "name": "Wall 34",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1826,11 +1749,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_36_5_81_4_53_6_88_4_53": {
+    "wall_35_5_81_4_53_6_88_4_53": {
       "object": "node",
-      "id": "wall_36_5_81_4_53_6_88_4_53",
+      "id": "wall_35_5_81_4_53_6_88_4_53",
       "type": "wall",
-      "name": "Wall 36",
+      "name": "Wall 35",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1850,11 +1773,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_37_5_81_5_36_5_81_7_12": {
+    "wall_36_5_81_5_36_5_81_7_12": {
       "object": "node",
-      "id": "wall_37_5_81_5_36_5_81_7_12",
+      "id": "wall_36_5_81_5_36_5_81_7_12",
       "type": "wall",
-      "name": "Wall 37",
+      "name": "Wall 36",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1874,11 +1797,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_38_5_81_7_12_5_81_11_98": {
+    "wall_37_5_81_7_12_5_81_11_98": {
       "object": "node",
-      "id": "wall_38_5_81_7_12_5_81_11_98",
+      "id": "wall_37_5_81_7_12_5_81_11_98",
       "type": "wall",
-      "name": "Wall 38",
+      "name": "Wall 37",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1898,11 +1821,11 @@
       "frontSide": "interior",
       "backSide": "interior"
     },
-    "wall_39_6_88_0_0_6_88_4_53": {
+    "wall_38_6_88_0_0_6_88_4_53": {
       "object": "node",
-      "id": "wall_39_6_88_0_0_6_88_4_53",
+      "id": "wall_38_6_88_0_0_6_88_4_53",
       "type": "wall",
-      "name": "Wall 39",
+      "name": "Wall 38",
       "parentId": "level_root",
       "visible": true,
       "metadata": {
@@ -1964,7 +1887,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_28_2_67_5_36_3_55_5_36",
+      "wallId": "wall_27_2_67_5_36_3_55_5_36",
       "position": [
         0.44,
         1.05,
@@ -1981,7 +1904,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_29_3_55_5_36_3_55_7_12",
+      "wallId": "wall_28_3_55_5_36_3_55_7_12",
       "position": [
         0.88,
         1.05,
@@ -2028,28 +1951,11 @@
       "object": "node",
       "id": "door_07",
       "type": "door",
-      "name": "Door Living-Logie",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {},
-      "wallId": "wall_23_1_96_11_98_4_54_11_98",
-      "position": [
-        1.1,
-        1.05,
-        0
-      ],
-      "width": 0.9,
-      "height": 2.1
-    },
-    "door_08": {
-      "object": "node",
-      "id": "door_08",
-      "type": "door",
       "name": "Door Birou-Balcon",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_34_5_81_1_31_5_81_4_53",
+      "wallId": "wall_33_5_81_1_31_5_81_4_53",
       "position": [
         0.8,
         1.05,
@@ -2083,7 +1989,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_27_2_67_1_31_5_81_1_31",
+      "wallId": "wall_26_2_67_1_31_5_81_1_31",
       "position": [
         1.57,
         1.25,
@@ -2100,7 +2006,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_25_2_67_0_0_6_88_0_0",
+      "wallId": "wall_24_2_67_0_0_6_88_0_0",
       "position": [
         1.25,
         1.25,
@@ -2117,7 +2023,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_25_2_67_0_0_6_88_0_0",
+      "wallId": "wall_24_2_67_0_0_6_88_0_0",
       "position": [
         2.95,
         1.25,
@@ -2134,7 +2040,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_39_6_88_0_0_6_88_4_53",
+      "wallId": "wall_38_6_88_0_0_6_88_4_53",
       "position": [
         1.35,
         1.25,
@@ -2151,7 +2057,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_39_6_88_0_0_6_88_4_53",
+      "wallId": "wall_38_6_88_0_0_6_88_4_53",
       "position": [
         3.15,
         1.25,
@@ -2168,7 +2074,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_36_5_81_4_53_6_88_4_53",
+      "wallId": "wall_35_5_81_4_53_6_88_4_53",
       "position": [
         0.53,
         1.25,
@@ -2185,7 +2091,7 @@
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_24_2_67_0_0_2_67_1_31",
+      "wallId": "wall_23_2_67_0_0_2_67_1_31",
       "position": [
         0.65,
         1.25,
@@ -2198,28 +2104,11 @@
       "object": "node",
       "id": "window_09",
       "type": "window",
-      "name": "Window Sufragerie Logie",
-      "parentId": "level_root",
-      "visible": true,
-      "metadata": {},
-      "wallId": "wall_23_1_96_11_98_4_54_11_98",
-      "position": [
-        2.0,
-        1.25,
-        0
-      ],
-      "width": 1.3,
-      "height": 1.5
-    },
-    "window_10": {
-      "object": "node",
-      "id": "window_10",
-      "type": "window",
       "name": "Window Baie East",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_37_5_81_5_36_5_81_7_12",
+      "wallId": "wall_36_5_81_5_36_5_81_7_12",
       "position": [
         0.88,
         1.5,
@@ -2228,9 +2117,9 @@
       "width": 0.8,
       "height": 0.8
     },
-    "window_11": {
+    "window_10": {
       "object": "node",
-      "id": "window_11",
+      "id": "window_10",
       "type": "window",
       "name": "Window Bucatarie South",
       "parentId": "level_root",
@@ -2245,11 +2134,11 @@
       "width": 1.2,
       "height": 1.5
     },
-    "window_12": {
+    "window_11": {
       "object": "node",
-      "id": "window_12",
+      "id": "window_11",
       "type": "window",
-      "name": "Window Logie South",
+      "name": "Window Sufragerie South",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
