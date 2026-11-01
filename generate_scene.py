@@ -2,14 +2,19 @@
 import json
 import math
 
-# Layout of rooms per releveu & user corrections
-# Logie is incorporated into Sufragerie (wall & door removed to make living room bigger)
-# Vestibul -> Hol Jos wall & door removed (clean open entrance)
-# Sufragerie east wall has no window (solid dividing wall)
+# Layout of rooms per releveu & user corrections:
+# - Camera 1 (10.8 m², left): Birou
+# - Camera 2 (12.7 m², right): Dormitor
+# - Door to balcony is on north wall of Dormitor, next to the window
+# - East wall of Dormitor is a plain solid wall (no door)
+# - Sufragerie includes Logie (wall & door removed to make living room bigger)
+# - Sufragerie east wall has no window (solid wall)
+# - Vestibul -> Hol Jos wall & door removed (clean open entrance)
+
 layout = {
     'Balcon': [(2.67, 0.0), (6.88, 0.0), (6.88, 4.53), (5.81, 4.53), (5.81, 1.31), (2.67, 1.31)],
-    'Dormitor': [(0.0, 1.31), (2.67, 1.31), (2.67, 5.36), (0.0, 5.36)],
-    'Birou': [(2.67, 1.31), (5.81, 1.31), (5.81, 5.36), (2.67, 5.36)],
+    'Birou': [(0.0, 1.31), (2.67, 1.31), (2.67, 5.36), (0.0, 5.36)],
+    'Dormitor': [(2.67, 1.31), (5.81, 1.31), (5.81, 5.36), (2.67, 5.36)],
     'Baie': [(3.55, 5.36), (5.81, 5.36), (5.81, 7.12), (3.55, 7.12)],
     'HolSus': [(0.41, 5.36), (3.55, 5.36), (3.55, 7.12), (0.41, 7.12)],
     'HolJos': [(0.0, 7.12), (1.96, 7.12), (1.96, 10.01), (0.0, 10.01)],
@@ -31,8 +36,8 @@ layout = {
 
 zone_info = {
     'Balcon':     {'name': 'Balcon',     'preset': 'wood', 'color': '#f0ece3', 'seed': [4.5, 0.65]},
-    'Dormitor':   {'name': 'Dormitor',   'preset': 'wood', 'color': '#f0ece3', 'seed': [1.33, 3.33]},
-    'Birou':      {'name': 'Birou',      'preset': 'wood', 'color': '#f0ece3', 'seed': [4.24, 3.33]},
+    'Birou':      {'name': 'Birou',      'preset': 'wood', 'color': '#f0ece3', 'seed': [1.33, 3.33]},
+    'Dormitor':   {'name': 'Dormitor',   'preset': 'wood', 'color': '#f0ece3', 'seed': [4.24, 3.33]},
     'Baie':       {'name': 'Baie',       'preset': 'tile', 'color': '#cfcdc6', 'seed': [4.68, 6.24]},
     'HolSus':     {'name': 'Hol Sus',    'preset': 'wood', 'color': '#f0ece3', 'seed': [1.98, 6.24]},
     'HolJos':     {'name': 'Hol Jos',    'preset': 'wood', 'color': '#f0ece3', 'seed': [0.98, 8.56]},
@@ -243,12 +248,13 @@ for w in walls.values():
 
 door_specs = [
     ("Door Intrare",          (-2.92, 7.12), (-2.92, 8.42), 0.90, 2.10, 0.65),
-    ("Door Hol-Dormitor",      (0.41, 5.36),  (2.67, 5.36), 0.85, 2.10, 1.15),
-    ("Door Hol-Birou",         (2.67, 5.36),  (3.55, 5.36), 0.75, 2.10, 0.44),
+    ("Door Hol-Birou",         (0.41, 5.36),  (2.67, 5.36), 0.85, 2.10, 1.15),
+    ("Door Hol-Dormitor",      (2.67, 5.36),  (3.55, 5.36), 0.75, 2.10, 0.44),
     ("Door Hol-Baie",          (3.55, 5.36),  (3.55, 7.12), 0.80, 2.10, 0.88),
     ("Door Hol-Bucatarie",     (0.00, 10.01), (1.89, 10.01), 0.85, 2.10, 0.95),
     ("Door Hol-Living",        (1.96, 7.12),  (1.96, 10.01), 0.90, 2.10, 1.45),
-    ("Door Birou-Balcon",      (5.81, 1.31),  (5.81, 4.53),  0.85, 2.10, 0.80)
+    # Door to balcony on north wall of Dormitor, next to the window
+    ("Door Dormitor-Balcon",   (2.67, 1.31),  (5.81, 1.31),  0.85, 2.10, 0.75)
 ]
 
 door_idx = 1
@@ -273,8 +279,9 @@ for name, p1, p2, width, height, pos in door_specs:
     door_idx += 1
 
 window_specs = [
-    ("Window Dormitor North",       (0.00, 1.31),  (2.67, 1.31),  1.40, 1.50, 1.33, 1.25),
-    ("Window Birou Balcon North",   (2.67, 1.31),  (5.81, 1.31),  1.50, 1.50, 1.57, 1.25),
+    ("Window Birou North",          (0.00, 1.31),  (2.67, 1.31),  1.40, 1.50, 1.33, 1.25),
+    # Window next to the balcony door on north wall of Dormitor
+    ("Window Dormitor North",       (2.67, 1.31),  (5.81, 1.31),  1.40, 1.50, 2.15, 1.25),
     ("Window Balcon North 1",       (2.67, 0.00),  (6.88, 0.00),  1.40, 1.50, 1.25, 1.25),
     ("Window Balcon North 2",       (2.67, 0.00),  (6.88, 0.00),  1.40, 1.50, 2.95, 1.25),
     ("Window Balcon East 1",        (6.88, 0.00),  (6.88, 4.53),  1.40, 1.50, 1.35, 1.25),

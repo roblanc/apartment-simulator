@@ -53,10 +53,10 @@
       "children": [
         "zone_balcon",
         "ceiling_balcon",
-        "zone_dormitor",
-        "ceiling_dormitor",
         "zone_birou",
         "ceiling_birou",
+        "zone_dormitor",
+        "ceiling_dormitor",
         "zone_baie",
         "ceiling_baie",
         "zone_holsus",
@@ -217,11 +217,11 @@
       "holes": [],
       "zoneId": "zone_balcon"
     },
-    "zone_dormitor": {
+    "zone_birou": {
       "object": "node",
-      "id": "zone_dormitor",
+      "id": "zone_birou",
       "type": "zone",
-      "name": "Dormitor",
+      "name": "Birou",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -262,11 +262,11 @@
         }
       }
     },
-    "ceiling_dormitor": {
+    "ceiling_birou": {
       "object": "node",
-      "id": "ceiling_dormitor",
+      "id": "ceiling_birou",
       "type": "ceiling",
-      "name": "Dormitor Ceiling",
+      "name": "Birou Ceiling",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -294,13 +294,13 @@
         ]
       ],
       "holes": [],
-      "zoneId": "zone_dormitor"
+      "zoneId": "zone_birou"
     },
-    "zone_birou": {
+    "zone_dormitor": {
       "object": "node",
-      "id": "zone_birou",
+      "id": "zone_dormitor",
       "type": "zone",
-      "name": "Birou",
+      "name": "Dormitor",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -345,11 +345,11 @@
         }
       }
     },
-    "ceiling_birou": {
+    "ceiling_dormitor": {
       "object": "node",
-      "id": "ceiling_birou",
+      "id": "ceiling_dormitor",
       "type": "ceiling",
-      "name": "Birou Ceiling",
+      "name": "Dormitor Ceiling",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -381,7 +381,7 @@
         ]
       ],
       "holes": [],
-      "zoneId": "zone_birou"
+      "zoneId": "zone_dormitor"
     },
     "zone_baie": {
       "object": "node",
@@ -1002,7 +1002,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Dormitor"
+          "Birou"
         ]
       },
       "children": [],
@@ -1026,7 +1026,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Dormitor"
+          "Birou"
         ]
       },
       "children": [],
@@ -1050,7 +1050,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Dormitor"
+          "Birou"
         ]
       },
       "children": [],
@@ -1219,7 +1219,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Dormitor",
+          "Birou",
           "HolSus"
         ]
       },
@@ -1511,8 +1511,8 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Dormitor",
-          "Birou"
+          "Birou",
+          "Dormitor"
         ]
       },
       "children": [],
@@ -1537,7 +1537,7 @@
       "metadata": {
         "rooms": [
           "Balcon",
-          "Birou"
+          "Dormitor"
         ]
       },
       "children": [],
@@ -1561,7 +1561,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Birou",
+          "Dormitor",
           "HolSus"
         ]
       },
@@ -1611,7 +1611,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Birou",
+          "Dormitor",
           "Baie"
         ]
       },
@@ -1710,7 +1710,7 @@
       "metadata": {
         "rooms": [
           "Balcon",
-          "Birou"
+          "Dormitor"
         ]
       },
       "children": [],
@@ -1734,7 +1734,7 @@
       "visible": true,
       "metadata": {
         "rooms": [
-          "Birou"
+          "Dormitor"
         ]
       },
       "children": [],
@@ -1866,7 +1866,7 @@
       "object": "node",
       "id": "door_02",
       "type": "door",
-      "name": "Door Hol-Dormitor",
+      "name": "Door Hol-Birou",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -1883,7 +1883,7 @@
       "object": "node",
       "id": "door_03",
       "type": "door",
-      "name": "Door Hol-Birou",
+      "name": "Door Hol-Dormitor",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -1951,13 +1951,13 @@
       "object": "node",
       "id": "door_07",
       "type": "door",
-      "name": "Door Birou-Balcon",
+      "name": "Door Dormitor-Balcon",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
-      "wallId": "wall_33_5_81_1_31_5_81_4_53",
+      "wallId": "wall_26_2_67_1_31_5_81_1_31",
       "position": [
-        0.8,
+        0.75,
         1.05,
         0
       ],
@@ -1968,7 +1968,7 @@
       "object": "node",
       "id": "window_01",
       "type": "window",
-      "name": "Window Dormitor North",
+      "name": "Window Birou North",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
@@ -1985,17 +1985,17 @@
       "object": "node",
       "id": "window_02",
       "type": "window",
-      "name": "Window Birou Balcon North",
+      "name": "Window Dormitor North",
       "parentId": "level_root",
       "visible": true,
       "metadata": {},
       "wallId": "wall_26_2_67_1_31_5_81_1_31",
       "position": [
-        1.57,
+        2.15,
         1.25,
         0
       ],
-      "width": 1.5,
+      "width": 1.4,
       "height": 1.5
     },
     "window_03": {

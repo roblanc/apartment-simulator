@@ -484,6 +484,23 @@ function getZoneBounds(zone) {
   }
 }
 
+// --- Birou: work desk, chair, bookcase, armchair ---
+{
+  const b = getZoneBounds(zonesByName['Birou'] || zonesByName['zone_birou']);
+  if (b) {
+    // Desk against west wall under north light
+    addBox([1.30, 0.75, 0.65], [b.minX + 0.75, 0.375, b.minZ + 1.20], 0xc9a876); // desk
+    addBox([0.60, 0.40, 0.05], [b.minX + 0.75, 0.95, b.minZ + 0.95], 0x111214);  // monitor
+    addBox([0.50, 0.85, 0.50], [b.minX + 0.75, 0.425, b.minZ + 1.85], 0x2d3748); // office chair
+
+    // Bookcase / storage along east wall
+    addBox([0.40, 1.90, 1.40], [b.maxX - 0.25, 0.95, b.minZ + 1.80], 0x5a4a3a);
+
+    // Reading armchair in corner
+    addBox([0.80, 0.75, 0.80], [b.minX + 0.50, 0.375, b.maxZ - 0.80], 0x4a5568);
+  }
+}
+
 // --- Dormitor: double bed, nightstands, wardrobe ---
 {
   const b = getZoneBounds(zonesByName['Dormitor'] || zonesByName['zone_dormitor']);
